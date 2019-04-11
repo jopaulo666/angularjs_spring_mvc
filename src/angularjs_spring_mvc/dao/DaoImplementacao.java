@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import angularjs_spring_mvc.hibernate.HibernateUtil;
 
+@Transactional(noRollbackFor = Exception.class)
 @Service
 public abstract class DaoImplementacao<T> implements DaoInterface<T>{
 
@@ -56,5 +58,10 @@ public abstract class DaoImplementacao<T> implements DaoInterface<T>{
 	@Override
 	public List<T> lista() throws Exception {
 		return sessionFactory.getCurrentSession().createCriteria(persistenceClass).list();
+	}
+	
+	@Override
+	public T loadObjeto(Long codCliente) throws Exception {
+		return (T) sessionFactory.getCurrentSession().get(persistenceClass, codCliente);
 	}
 }

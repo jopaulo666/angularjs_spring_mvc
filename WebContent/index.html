@@ -1,13 +1,10 @@
-
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html ng-app="loja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Loja</title>
 
-<!-- compatibilidade com dispositivos móveis (Celular) -->
+<meta charset="ISO-8859-1">
+
 <meta
 	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
 	name='viewport' />
@@ -43,161 +40,107 @@
 <link href="resources/css/themify-icons.css" rel="stylesheet" />
 
 <link href="resources/css/font-awesome.min.css" rel="stylesheet">
-	<link href="resources/css/themify-icons.css" rel="stylesheet">
-		<link href="resources/css/jquery-ui.css" rel="stylesheet">
+<link href="resources/css/themify-icons.css" rel="stylesheet">
+<link href="resources/css/jquery-ui.css" rel="stylesheet">
 
-			<script type="text/javascript" src="resources/js/app.js"></script>
+<script type="text/javascript" src="resources/js/app.js"></script>
+
+<script type="text/javascript" src="resources/js/lojaController.js"></script>
+<script type="text/javascript" src="resources/js/livroController.js"></script>
+
+
+<style type="text/css">
+
+.form-control {
+    background-color: #fffcf5;
+    border: solid  1px !important; 
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s ease 0s;
+    padding: 7px 18px;
+    height: 40px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+</style>
+
 </head>
 
-<body>
-<div class="wrapper">
-	<div class="sidebar" data-background-color="white"
-		data-active-color="danger">
+<body id="corpo">
 
-		<div class="sidebar-wrapper">
+	<div class="wrapper">
+		<div class="sidebar" data-background-color="white"
+			data-active-color="danger">
 
-			<ul class="nav">
-				<li class="active">
-					<a href="#clientelist">
-						<p>Clientes</p>
-					</a>
-				</li>
-				<li>
-					<a href="user.html"> 
-						<p>User Profile</p>
-					</a>
-				</li>
-				<li>
-					<a href="table.html"> 
-						<p>Table List</p>
-					</a>
-				</li>
-				<li>
-					<a href="typography.html">
-						<p>Typography</p>
-					</a>
-				</li>
-			</ul>
-		</div>
-	</div>
+			<div class="sidebar-wrapper">
 
-	<div class="main-panel">
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">Página inicial</a>
-				</div>
-				<div class="collapse navbar-collapse">
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle"	data-toggle="dropdown">
-								<p>Cadastro</p>
-								<b class="caret"></b>
-							</a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Notification 1</a></li>
-								<li><a href="#">Notification 2</a></li>
-								<li><a href="#">Notification 3</a></li>
-								<li><a href="#">Notification 4</a></li>
-								<li><a href="#">Another notification</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="#">
-								<p>Sair</p>
-							</a>
-						</li>
-					</ul>
-	
-				</div>
+				<ul class="nav">
+					<li class="active"><a href="#clientelist">
+							<p>Clientes</p>
+					</a></li>
+					<li class="active"><a href="#fornecedorlist">
+							<p>Fornecedor</p>
+					</a></li>
+					<li class="active"><a href="#livrolist">
+							<p>Livro</p>
+					</a></li>
+					<li class="active"><a href="#/loja/online">
+							<p>Loja de livro</p>
+					</a></li>
+					<li class="active"><a href="#/loja/pedidos">
+							<p>Pedidos</p>
+					</a></li>
+					
+					<li class="active"><a href="#/grafico/media_pedido">
+							<p>Média Pedido</p>
+					</a></li>
+				</ul>
 			</div>
-		</nav>
-		<!-- Meio -->
-		<div class="content" ng-view>
+		</div>
+
+		<div class="main-panel">
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="#">Home</a>
+					</div>
+					<div class="collapse navbar-collapse">
+						<ul class="nav navbar-nav navbar-right">
+						
+							<li class="dropdown">
+							<a href="/" class="dropdown-toggle"
+								data-toggle="dropdown">
+									<p>Cadastros</p> <b class="caret"></b>
+							</a>
+								<ul class="dropdown-menu">
+									<li><a href="#/cliente/cadastro">Novo Cliente</a></li>
+									<li><a href="#/fornecedor/cadastro">Novo Fornecedor</a></li>
+									<li><a href="#/livro/cadastro">Novo Livro</a></li>
+									<li><a href="#/loja/online">Loja de Livros</a></li>
+									<li><a href="#/loja/pedidos">Pedidos</a></li>
+									<li><a href="#/grafico/media_pedido">Média de Livros</a></li>
+								</ul></li>
+							<li><a href="#/">
+									<p>Sair</p>
+							</a></li>
+						</ul>
+
+					</div>
+				</div>
+	
+			</nav>
+
+			<div class="content" ng-view>
+			</div>
 			
 		</div>
-
-
-		<footer class="footer">
-		<div class="container-fluid">
-			<nav class="pull-left"> </nav>
-			<div class="copyright pull-right">
-				&copy;
-				<script>
-					document.write(new Date().getFullYear())
-				</script>
-				, made with <i class="fa fa-heart heart"></i> by <a
-					href="http://www.creative-tim.com">Creative Tim</a>
-			</div>
-		</div>
-		</footer>
-
 	</div>
-</div>
-</body>
-
-<div class="fixed-plugin">
-	<div class="dropdown show-dropdown">
-		<a href="#" data-toggle="dropdown"> <i class="fa fa-cog fa-2x">
-		</i>
-		</a>
-		<ul class="dropdown-menu">
-			<li class="header-title">Sidebar Background</li>
-			<li class="adjustments-line text-center"><a
-				href="javascript:void(0)" class="switch-trigger background-color">
-					<span class="badge filter badge-white active" data-color="white"></span>
-					<span class="badge filter badge-black" data-color="black"></span>
-			</a></li>
-
-			<li class="header-title">Sidebar Active Color</li>
-			<li class="adjustments-line text-center"><a
-				href="javascript:void(0)" class="switch-trigger active-color"> <span
-					class="badge filter badge-primary" data-color="primary"></span> <span
-					class="badge filter badge-info" data-color="info"></span> <span
-					class="badge filter badge-success" data-color="success"></span> <span
-					class="badge filter badge-warning" data-color="warning"></span> <span
-					class="badge filter badge-danger active" data-color="danger"></span>
-			</a></li>
-
-			<li class="button-container">
-				<div class="">
-					<a href="http://www.creative-tim.com/product/paper-dashboard"
-						target="_blank" class="btn btn-info btn-block btn-fill">Download
-						for Free</a>
-				</div>
-			</li>
-
-			<li class="header-title">Want More Components?</li>
-			<li class="button-container">
-				<div class="">
-					<a
-						href="http://www.creative-tim.com/product/paper-dashboard-pro?ref=pd-free-upgrade-live"
-						target="_blank" class="btn btn-danger btn-block btn-fill">Get
-						PRO Version!</a>
-				</div>
-			</li>
-
-			<li class="header-title">Thank you for sharing!</li>
-
-			<li class="button-container">
-				<button id="twitter" class="btn btn-social btn-twitter btn-round">
-					<i class="fa fa-twitter"></i>
-				</button>
-				<button id="facebook" class="btn btn-social btn-facebook btn-round">
-					<i class="fa fa-facebook-square"></i>
-				</button>
-			</li>
-
-		</ul>
-	</div>
-</div>
-
 </body>
 
 <script type="text/javascript">
     	$(document).ready(function(){
         	$.notify({
-            	message: "Bem Vindo!"
+            	message: "Seja Bem Vindo!"
 
             },{
                 type: 'success',
@@ -205,19 +148,18 @@
             });
     	});
     
-    	$.get("livro/autenticar", function(data) {
-		 /*   json = JSON.parse(data);
-		    permissao = json.permissao;
+//     	$.get("livro/autenticar", function(data) {
+// 		 /*   json = JSON.parse(data);
+// 		    permissao = json.permissao;
 		    
-		   if (json.permissoes.toString().indexOf("SECRETARIO") >= 0){
-			   location.href = 'secretario.html';
-		   }else
-		   if (json.permissoes.toString().indexOf("ADMIN") >= 0){
-			   location.href = 'admin.html';
-		   }*/
+// 		   if (json.permissoes.toString().indexOf("SECRETARIO") >= 0){
+// 			   location.href = 'secretario.html';
+// 		   }else
+// 		   if (json.permissoes.toString().indexOf("ADMIN") >= 0){
+// 			   location.href = 'admin.html';
+// 		   }*/
 		    
-		});
+// 		});
     	
 	</script>
-
 </html>

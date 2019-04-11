@@ -1,6 +1,67 @@
 <html>
-	<h1>Cadastro de clientes</h1>
-	<a href="#clientelist"> 
-		<p>Novo clientes</p> 
-	</a>
+<h1>Cadastro de clientes</h1>
+
+<a href="#clientelist"> Lista de clientes </a>
+<br>
+
+<div class="col-lg-8 col-md-7">
+	<div class="card">
+		<div class="header">
+			<h4 class="title">Novo cliente</h4>
+		</div>
+		<div class="content">
+			<form id="formCliente" ng-submit="salvarCliente();">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Código</label> <input type="text" ng-model="cliente.id"
+								class="form-control border-input" disabled>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Nome</label> <input type="text" ng-model="cliente.nome"
+								class="form-control border-input" placeholder="Nome completo"
+								required="required">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="endereco">Endereço</label> <input
+								type="text" ng-model="cliente.endereco"
+								class="form-control border-input"
+								placeholder="Endereço" required="required">
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Telefone</label> <input type="text" ng-model="cliente.telefone"
+								class="form-control border-input" 
+								placeholder="(99) 99999-9999" required="required">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>E-mail</label> <input type="email" ng-model="cliente.email"
+								class="form-control border-input" 
+								placeholder="E-mail" required="required">
+						</div>
+					</div>
+				</div>
+				
+				<div class="text-center">
+					<button type="submit" class="btn btn-info btn-fill btn-wd">Cadastrar</button>
+					<button type="submit" class="btn btn-info btn-fill btn-wd"
+						ng-click="$scope.cliente={}">Limpar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 </html>
