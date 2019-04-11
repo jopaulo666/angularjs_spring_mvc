@@ -19,6 +19,20 @@ public class Cliente {
 	private String telefone;
 	
 	private String email;
+	
+	private String sexo;
+	
+	private Boolean ativo;
+	
+	public String interesse;
+	
+	public void setInteresse(String interesse) {
+		this.interesse = interesse;
+	}
+	
+	public String getInteresse() {
+		return interesse;
+	}
 
 	public Long getId() {
 		return id;
@@ -58,6 +72,24 @@ public class Cliente {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+	
+	public boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		if (ativo == null)
+			this.ativo = false;
+		this.ativo = ativo;
 	}
 
 	@Override
