@@ -25,7 +25,7 @@ app.controller("clienteController", function($scope, $http, $location, $routePar
 		$http.get("cliente/buscarcliente/" + $routeParams.id).success(function(response) {
 			$scope.cliente = response;
 		}).error(function(data, status, headers, config) {
-			alert("Error: " + status);
+			erro("Error: " + status);
 		});
 	} else {
 		//novo
@@ -41,8 +41,9 @@ app.controller("clienteController", function($scope, $http, $location, $routePar
 	$scope.salvarCliente = function () {		
 		$http.post("cliente/salvar", $scope.cliente).success(function(response) {
 			$scope.cliente = {}; // limpa a tela e inicia um novo cliente
+			sucesso("Cliente salvo!");
 		}).error(function(data, status, headers, config) {
-			alert("Erro" + response);
+			erro("Erro" + response);
 		});
 	};
 	
@@ -50,15 +51,34 @@ app.controller("clienteController", function($scope, $http, $location, $routePar
 		$http.get("cliente/listar").success(function(response) {
 			$scope.data = response;
 		}).error(function(response) {
-			alert("Erro" + response);
+			erro("Erro" + response);
 		});
 	};
 	
 	$scope.removerCliente = function(codCliente) {
 		$http.delete("cliente/deletar/" + codCliente).success(function(response) {
 			$scope.listarClientes();
+			sucesso("Cliente deletado!");
 		}).error(function(data, status, headers, config) {
-			alert("Error: " + status);
+			erro("Error: " + status);
 		});
 	};
 });
+
+function sucesso(msg) {
+	$.notify({
+		message: msg
+	},{
+	    type: 'success',
+	    timer: 1000
+	});
+};
+
+function erro(msg) {
+	$.notify({
+		message: msg
+	},{
+	    type: 'danger',
+	    timer: 1000
+	});
+};
