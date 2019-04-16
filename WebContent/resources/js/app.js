@@ -80,12 +80,15 @@ app.controller("clienteController", function($scope, $http, $location, $routePar
 		});
 	};
 	
+	//carrega as cidades de acordo com o estado passado por parâmetro
 	$scope.carregarCidades = function(estado) {
-		$http.get("cidades/listar/" + estado.id).success(function(response) {
-			$scope.cidades = response;
-		}).error(function(response) {
-			erro("Erro" + response);
-		});
+		if (identific_nav() != 'chrome'){
+			$http.get("cidades/listar/" + estado.id).success(function(response) {
+				$scope.cidades = response;
+			}).error(function(response) {
+				erro("Erro" + response);
+			});
+		}
 	};
 	
 	$scope.carregarEstados = function() {
@@ -124,6 +127,40 @@ function buscarKeyJson(obj, key, value) {
 		}
 	}
 	return null;
+}
+
+//carregar cidades quando é navegador chrome usando jQuery
+function carregarCidadesChrome(estado) {
+	if (identific_nav() === 'chrome') {// executa se for chrome
+		$.get("cidades/listarchrome", { idEstado : estado.value}, function(data) {
+			 var json = JSON.parse(data);
+			 html = '<option value="">--Selecione--</option>';
+			 for (var i = 0; i < json.length; i++) {
+				  html += '<option value='+json[i].id+'>'+json[i].nome+'</option>';
+			 }
+			 $('#selectCidades').html(html);
+		});
+  }
+}
+
+//identificar navegador
+function identific_nav(){
+    var nav = navigator.userAgent.toLowerCase();
+    if(nav.indexOf("msie") != -1){
+       return browser = "msie";
+    }else if(nav.indexOf("opera") != -1){
+    	return browser = "opera";
+    }else if(nav.indexOf("mozilla") != -1){
+        if(nav.indexOf("firefox") != -1){
+        	return  browser = "firefox";
+        }else if(nav.indexOf("firefox") != -1){
+        	return browser = "mozilla";
+        }else if(nav.indexOf("chrome") != -1){
+        	return browser = "chrome";
+        }
+    }else{
+    	alert("Navegador desconhecido!");
+    }
 }
 
 
