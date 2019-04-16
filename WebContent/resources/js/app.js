@@ -1,4 +1,4 @@
-	var app = angular.module('loja', [ 'ngRoute', 'ngResource', 'ngAnimate' ]);
+var app = angular.module('loja', [ 'ngRoute', 'ngResource', 'ngAnimate' ]);
 
 app.config(function($routeProvider, $provide, $httpProvider, $locationProvider) {
 	$routeProvider.when("/clientelist", {
@@ -24,6 +24,22 @@ app.controller("clienteController", function($scope, $http, $location, $routePar
 		//editar
 		$http.get("cliente/buscarcliente/" + $routeParams.id).success(function(response) {
 			$scope.cliente = response;
+			//------------------ carrega estados e cidades do cliente em edição
+			setTimeout(function () {
+				$("#selectEstados").prop('selectedIndex', (new Number($scope.cliente.estados.id) + 1));
+				
+				$http.get("cidades/listar/" + $scope.cliente.estados.id).success(function(response) {
+					$scope.cidades = response;
+					setTimeout(function () {
+						$("#selectCidades").prop('selectedIndex', buscarKeyJson(response, 'id', $scope.cliente.cidades.id));
+					}, 1000);
+					
+				}).error(function(data, status, headers, config) {
+					erro("Error: " + status);
+				});
+			
+			}, 1000);
+			//----------------------
 		}).error(function(data, status, headers, config) {
 			erro("Error: " + status);
 		});
@@ -59,8 +75,25 @@ app.controller("clienteController", function($scope, $http, $location, $routePar
 		$http.delete("cliente/deletar/" + codCliente).success(function(response) {
 			$scope.listarClientes();
 			sucesso("Cliente deletado!");
-		}).error(function(data, status, headers, config) {
+		}).error(function(data, status, headers, config) { 
 			erro("Error: " + status);
+		});
+	};
+	
+	$scope.carregarCidades = function(estado) {
+		$http.get("cidades/listar/" + estado.id).success(function(response) {
+			$scope.cidades = response;
+		}).error(function(response) {
+			erro("Erro" + response);
+		});
+	};
+	
+	$scope.carregarEstados = function() {
+		$scope.dataEstados = [{}];
+		$http.get("estados/listar").success(function(response) {
+			$scope.dataEstados = response;
+		}).error(function(response) {
+			erro("Erro" + response);
 		});
 	};
 });
@@ -82,3 +115,27 @@ function erro(msg) {
 	    timer: 1000
 	});
 };
+
+// faz a identificação da ṕosição correta da cidade do registro para mostrar edição
+function buscarKeyJson(obj, key, value) {
+	for (var i = 0; i < obj.length; i++) {
+		if (obj[i][key] == value) {
+			return i + 2;
+		}
+	}
+	return null;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

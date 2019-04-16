@@ -36,8 +36,8 @@
 		lazy-init="false">
 		<property name="dataSource" ref="springDataSource" />
 		<property name="baselineOnMigrate" value="true" />
-		<property name="table" value="version" />
-		<property name="sqlMigrationPrefix" value="v" />
+		<property name="table" value="version" /> <!-- nome da tabela criada -->
+		<property name="sqlMigrationPrefix" value="v" /> <!-- prefixo dos arquivos -->
 		<property name="sqlMigrationSeparator" value="_" />
 		<property name="encoding" value="ISO-8859-1" />
 		<property name="validateOnMigrate" value="false" />
@@ -56,15 +56,15 @@
 	</bean>
 
 
-<!-- 	<bean id="estadosController" name="estadosController" -->
-<!-- 		class="curso.angular.controller.EstadosController"> -->
-<!-- 		<constructor-arg value="curso.angular.model.Estados" /> -->
-<!-- 	</bean> -->
+	<bean id="estadosController" name="estadosController"
+		class="angularjs_spring_mvc.controller.EstadosController">
+		<constructor-arg value="angularjs_spring_mvc.model.Estados" />
+	</bean>
 
-<!-- 	<bean id="cidadesController" name="cidadesController" -->
-<!-- 		class="curso.angular.controller.CidadesController"> -->
-<!-- 		<constructor-arg value="curso.angular.model.Cidades" /> -->
-<!-- 	</bean> -->
+	<bean id="cidadesController" name="cidadesController"
+		class="angularjs_spring_mvc.controller.CidadesController">
+		<constructor-arg value="angularjs_spring_mvc.model.Cidades" />
+	</bean>
 
 <!-- 	<bean id="fornecedorController" name="fornecedorController" -->
 <!-- 		class="curso.angular.controller.FornecedorController"> -->

@@ -24,8 +24,8 @@
 <!-- 		<property name="hibernate.temp.use_jdbc_metadata_defaults" value="false"/> -->
 
 
-<!-- 	    <mapping class="angularjs_spring_mvc.model.Estados" /> -->
-<!-- 	    <mapping class="angularjs_spring_mvc.model.Cidades" /> -->
+	    <mapping class="angularjs_spring_mvc.model.Estados" />
+	    <mapping class="angularjs_spring_mvc.model.Cidades" />
 		<mapping class="angularjs_spring_mvc.model.Cliente" />
 <!-- 		<mapping class="angularjs_spring_mvc.model.Fornecedor" /> -->
 <!-- 		<mapping class="angularjs_spring_mvc.model.Livro" /> -->

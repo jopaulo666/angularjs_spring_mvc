@@ -64,4 +64,12 @@ public abstract class DaoImplementacao<T> implements DaoInterface<T>{
 	public T loadObjeto(Long codCliente) throws Exception {
 		return (T) sessionFactory.getCurrentSession().get(persistenceClass, codCliente);
 	}
+
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public Class<T> getPersistenceClass() {
+		return persistenceClass;
+	}
 }

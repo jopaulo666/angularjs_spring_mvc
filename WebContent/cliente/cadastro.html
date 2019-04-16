@@ -7,7 +7,7 @@
 <br>
 <br>
 
-<div class="col-lg-8 col-md-7">
+<div class="col-lg-11 col-md-8" ng-init="carregarEstados();">
 	<div class="card">
 		<div class="header">
 			<h4 class="title">Novo cliente</h4>
@@ -59,7 +59,7 @@
 				</div>
 				
 				<div class="row">
-					<div class="col-md-5">
+					<div class="col-md-3">
 						<div class="form-group">
 							<label>Sexo</label>
 							<select ng-model="cliente.sexo" class="form-control border-input">
@@ -72,6 +72,34 @@
 						<div class="form-group">
 							<label>Ativo</label>
 							<input type="checkbox" class="form-control border-input" ng-model="cliente.ativo">
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group"> 
+						   <label>Estado</label> 
+							<select ng-model="cliente.estados.id"
+								 id="selectEstados"
+								  class="form-control" onchange="javascript:carregarCidadesChrome(this);"> 
+								  <option value="">Selecione</option> 
+								  <option
+								  	ng-repeat="est in dataEstados"  
+								  	ng-click="carregarCidades(est)"
+								  	value="{{est.id}}">{{est.sigla}}
+								  </option>
+							</select>	
+						</div>
+					</div>
+					<div class="col-md-5">
+						<div class="form-group"> 
+						   <label>Cidades</label> 
+							<select id="selectCidades" ng-model="cliente.cidades.id" 
+							class="form-control"> 
+							<option value="">Selecione</option>
+							  <option
+								  ng-repeat="cid in cidades"
+								  value="{{cid.id}}">{{cid.nome}}
+							  </option>
+							</select>	
 						</div>
 					</div>
 				</div>

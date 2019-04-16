@@ -1,9 +1,13 @@
 package angularjs_spring_mvc.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.ForeignKey;
 
 @Entity
 public class Cliente {
@@ -25,6 +29,30 @@ public class Cliente {
 	private Boolean ativo;
 	
 	public String interesse;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@ForeignKey(name="estados_fk")
+	private Estados estados = new Estados();
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@ForeignKey(name="cidades_fk")
+	private Cidades cidades = new Cidades();
+	
+	public void setCidades(Cidades cidades) {
+		this.cidades = cidades;
+	}
+	
+	public Cidades getCidades() {
+		return cidades;
+	}
+	
+	public void setEstados(Estados estados) {
+		this.estados = estados;
+	}
+	
+	public Estados getEstados() {
+		return estados;
+	}
 	
 	public void setInteresse(String interesse) {
 		this.interesse = interesse;
