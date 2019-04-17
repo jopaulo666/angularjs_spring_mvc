@@ -19,6 +19,7 @@
 		<table class="table table-hover">
 			<thead>
 				<th>Código</th>
+				<th>Foto</th>
 				<th>Nome</th>
 				<th>Endereço</th>
 				<th>Telefone</th>
@@ -29,17 +30,20 @@
 			<tbody>
 				<tr ng-repeat="cliente in data | filter: filtro"> 
 					<td>{{cliente.id}}</td>
+					<td> <img src="{{cliente.foto}}" style="width: 40px; height: 43px;"/> </td>
 					<td>{{cliente.nome}}</td>
 					<td>{{cliente.endereco}}</td>
 					<td>{{cliente.telefone}}</td>
 					<td>{{cliente.email}}</td>
 					<td>
 						<a href ng-click="removerCliente(cliente.id);">
-							<img alt="Remover" src="resources/img/delete-icon.png"></a>
+							<img alt="Remover" src="resources/img/delete-icon.png">
+						</a>
 					</td>
 					<td>
 						<a href ng-click="editarCliente(cliente.id);">
-							<img alt="Editar" src="resources/img/edit-icon.png"></a>
+							<img alt="Editar" src="resources/img/edit-icon.png" ng-mouseover="Editar Cliente">
+						</a>
 					</td>
 				</tr>
 			</tbody>

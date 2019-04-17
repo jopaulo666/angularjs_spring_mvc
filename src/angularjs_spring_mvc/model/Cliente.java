@@ -1,5 +1,6 @@
 package angularjs_spring_mvc.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -38,8 +39,19 @@ public class Cliente {
 	@ForeignKey(name="cidades_fk")
 	private Cidades cidades = new Cidades();
 	
+	@Column(columnDefinition="text")
+	private String foto;
+	
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+	
 	public void setCidades(Cidades cidades) {
 		this.cidades = cidades;
+	}
+	
+	public String getFoto() {
+		return foto;
 	}
 	
 	public Cidades getCidades() {

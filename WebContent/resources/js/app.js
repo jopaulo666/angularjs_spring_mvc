@@ -18,12 +18,15 @@ app.config(function($routeProvider, $provide, $httpProvider, $locationProvider) 
 	});
 });
 
+
+// Cliente 
 app.controller("clienteController", function($scope, $http, $location, $routeParams) {
 	
 	if ($routeParams.id != null && $routeParams.id != undefined && $routeParams.id != '') {
 		//editar
 		$http.get("cliente/buscarcliente/" + $routeParams.id).success(function(response) {
 			$scope.cliente = response;
+			document.getElementById("imagemCliente").src = $scope.cliente.foto; // carrega img
 			//------------------ carrega estados e cidades do cliente em edição
 			setTimeout(function () {
 				$("#selectEstados").prop('selectedIndex', (new Number($scope.cliente.estados.id) + 1));
@@ -54,10 +57,13 @@ app.controller("clienteController", function($scope, $http, $location, $routePar
 	
 	$scope.cliente = {};
 	
-	$scope.salvarCliente = function () {		
+	$scope.salvarCliente = function () {
+		$scope.cliente.foto = document.getElementById("imagemCliente").getAttribute("src");
+		
 		$http.post("cliente/salvar", $scope.cliente).success(function(response) {
 			$scope.cliente = {}; // limpa a tela e inicia um novo cliente
-			sucesso("Cliente salvo!");
+			document.getElementById("imagemCliente").src = ''; // limpa a imagem
+			sucesso("Cliente salvo com sucesso!");
 		}).error(function(data, status, headers, config) {
 			erro("Erro" + response);
 		});
@@ -141,6 +147,23 @@ function carregarCidadesChrome(estado) {
 			 $('#selectCidades').html(html);
 		});
   }
+}
+
+// add imagem ao campo html img
+function visualizarImg() {
+	var preview = document.querySelectorAll('img').item(1);
+	var file = document.querySelector('input[type=file]').files[0]; //pega a img selecionada
+	var reader = new FileReader();
+	
+	reader.onloadend = function() {
+		preview.src = reader.result; // carrega em base64 a img
+	};
+	
+	if (file) {
+		reader.readAsDataURL(file);
+	} else {
+		preview.src = "";
+	}
 }
 
 //identificar navegador
