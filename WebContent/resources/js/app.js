@@ -87,18 +87,22 @@ app.controller("clienteController", function($scope, $http, $location, $routePar
 	};
 	
 	$scope.proximo = function() {
-		$scope.listarClientes(new Number($scope.numeroPagina + 1));
-	}
+		if(new Number($scope.numeroPagina) < Number($scope.totalPagina)){
+			$scope.listarClientes(new Number($scope.numeroPagina + 1))
+		}
+	};
 	
 	$scope.anterior = function() {
-		$scope.listarClientes(new Number($scope.numeroPagina - 1));
-	}
+		if(new Number($scope.numeroPagina) > 1){
+			$scope.listarClientes(new Number($scope.numeroPagina - 1));
+		}
+	};
 	
 	//deleta cliente
 	$scope.removerCliente = function(codCliente) {
 		$http.delete("cliente/deletar/" + codCliente).success(function(response) {
 			$scope.listarClientes($scope.numeroPagina);
-			sucesso("Cliente deletado com sucesso!");
+			sucesso("Cliente removido com sucesso!");
 		}).error(function(data, status, headers, config) { 
 			erro("Error: " + status);
 		});

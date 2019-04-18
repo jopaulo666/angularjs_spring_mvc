@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.ForeignKey;
 
 @Entity
-public class Cliente {
+public class Cliente{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,6 +31,10 @@ public class Cliente {
 	
 	public String interesse;
 	
+	private String cpf;
+	
+	private String rg;
+	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@ForeignKey(name="estados_fk")
 	private Estados estados = new Estados();
@@ -41,6 +45,22 @@ public class Cliente {
 	
 	@Column(columnDefinition="text")
 	private String foto;
+	
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+	
+	public String getCpf() {
+		return cpf;
+	}
+	
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+	
+	public String getRg() {
+		return rg;
+	}
 	
 	public void setFoto(String foto) {
 		this.foto = foto;
