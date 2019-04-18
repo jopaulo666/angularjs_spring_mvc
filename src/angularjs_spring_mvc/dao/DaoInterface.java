@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+// Implementação dos metodos padrões da interface de acesso ao banco e operações
 @Transactional(noRollbackFor = Exception.class)
 @Service
 public interface DaoInterface<T> {
@@ -22,4 +23,8 @@ public interface DaoInterface<T> {
 	List<T> lista() throws Exception;
 	
 	T loadObjeto(Long codigo) throws Exception;
+	
+	int quantidadePagina() throws Exception;
+	
+	List<T> consultaPaginada(String numeroPagina) throws Exception;
 }

@@ -33,10 +33,16 @@ public class ClienteController extends DaoImplementacao<Cliente> implements
 	}
 	
 	//intercepta
-	@RequestMapping(value="listar", method=RequestMethod.GET, headers = "Accept=application/json")
+	@RequestMapping(value="listar/{numeroPagina}", method=RequestMethod.GET, headers = "Accept=application/json")
 	@ResponseBody
-	public String listar() throws Exception{		
-		return new Gson().toJson(super.lista());
+	public String listar(@PathVariable("numeroPagina") String numeroPagina) throws Exception{		
+		return new Gson().toJson(super.consultaPaginada(numeroPagina));
+	}
+	
+	@RequestMapping(value="totalPagina", method=RequestMethod.GET, headers = "Accept=application/json")
+	@ResponseBody
+	public String totalPagina() throws Exception{		
+		return ""+super.quantidadePagina();
 	}
 	
 	@RequestMapping(value="deletar/{codCliente}", method=RequestMethod.DELETE)

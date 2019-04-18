@@ -1,0 +1,41 @@
+[33mcommit 5cdab9f94ab00e621b36b5f3e99b8cf7b1c7f03b[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: João Paulo <jp_cbc@hotmail.com>
+Date:   Tue Apr 16 23:05:28 2019 -0300
+
+    Upload de imagens
+
+[33mcommit 196c98fb2a6e5e09ec0a9335b4ce4f56478bb849[m
+Author: João Paulo <jp_cbc@hotmail.com>
+Date:   Tue Apr 16 16:57:28 2019 -0300
+
+    Resolvendo compatibilidade com Chrome e adicionando máscara de telefone
+
+[33mcommit 28aad866a6065ae7a93af3048f24771fbba31974[m
+Author: João Paulo <jp_cbc@hotmail.com>
+Date:   Tue Apr 16 11:01:33 2019 -0300
+
+    Adicionando combobox de estados e cidades
+
+[33mcommit af9408d55761839b00640060a0975fd0b07b3af4[m
+Author: João Paulo <jp_cbc@hotmail.com>
+Date:   Thu Apr 11 17:06:36 2019 -0300
+
+    Adicionando componentes
+
+[33mcommit 75ea49791a8ecc0e6f7e9ab1c455436bae6012b0[m
+Author: João Paulo <jp_cbc@hotmail.com>
+Date:   Thu Apr 11 10:58:59 2019 -0300
+
+    Notificação de cliente
+
+[33mcommit 79e65818c1e54c5336ad926f390bdb0e130fcdfc[m
+Author: João Paulo <jp_cbc@hotmail.com>
+Date:   Wed Apr 10 21:52:02 2019 -0300
+
+    Cadastro, listagem, edição e exclusão de clientes
+
+[33mcommit 2bb014ceeed2184c698f48cb42f0b494fba7c2d8[m
+Author: João Paulo <jp_cbc@hotmail.com>
+Date:   Thu Apr 4 10:02:05 2019 -0300
+
+    Iniciação do projeto - criação da interface cliente, criação do banco de dados e suas configuraçãoes, classe cliente, DaoController, DaoImplementação, DaoInterface
