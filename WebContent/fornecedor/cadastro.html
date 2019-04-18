@@ -1,7 +1,7 @@
 <html>
-<h1>Cadastro de clientes</h1>
+<h1>Cadastro de Fornecedor</h1>
 
-<a href="#clientelist"> Lista de clientes
+<a href="#fornecedorlist"> Lista de fornecedor
 	<img alt="Editar" src="resources/img/list-icon.png">
 </a>
 <br>
@@ -10,21 +10,21 @@
 <div class="col-lg-11 col-md-8" ng-init="carregarEstados();">
 	<div class="card">
 		<div class="header">
-			<h4 class="title">Novo cliente</h4>
+			<h4 class="title">Novo fornecedor</h4>
 		</div>
 		<div class="content">
-			<form id="formCliente" ng-submit="salvarCliente();">
+			<form id="formFornecedor" ng-submit="salvarFornecedor();">
 				<div class="row">
 					<div class="col-md-3">
 						<div class="form-group">
 							<label>Código</label>
-							<input type="text" ng-model="cliente.id"
+							<input type="text" ng-model="fornecedor.id"
 								class="form-control border-input" disabled>
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="form-group">
-							<img alt="Foto" id="imagemCliente" src="" style="width: 118px; height: 140px; border: 0">
+							<img alt="Foto" id="imagemFornecedor" src="" style="width: 118px; height: 140px; border: 0">
 							<input type="file" id="file" onchange="javascript:visualizarImg();">
 						</div>
 					</div>
@@ -33,17 +33,17 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label>Nome</label> <input type="text" ng-model="cliente.nome"
-								class="form-control border-input" placeholder="Nome completo"
+							<label>Razação Social</label> <input type="text" ng-model="fornecedor.razaoSocial"
+								class="form-control border-input" placeholder="Razão Social"
 								required="required">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="endereco">Endereço</label>
-								<input type="text" ng-model="cliente.endereco"
+							<label for="endereco">Nome Fantasia</label>
+								<input type="text" ng-model="fornecedor.nomeFantasia"
 								class="form-control border-input"
-								placeholder="Ex: Rua Presidente Vargas, 999" required="required">
+								placeholder="Nome Fantasia" required="required">
 						</div>
 					</div>
 				</div>
@@ -51,23 +51,21 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label>CPF</label>
+							<label>CNPJ</label>
 							<input type="text"
-								id="cpf"
-								ng-model="cliente.cpf"
+								id="cnpj"
+								ng-model="fornecedor.cnpj"
 								class="form-control border-input"
-								placeholder="999.999.999-99"
+								placeholder="99.999.999/9999-99"
 								required="required">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label>RG</label>
-							<input type="text"
-								id="cpf"
-								ng-model="cliente.rg"
+							<label for="endereco">Endereço</label>
+								<input type="text" ng-model="fornecedor.endereco"
 								class="form-control border-input"
-								placeholder="Somente números">
+								placeholder="Ex: Rua Presidente Vargas, 999" required="required">
 						</div>
 					</div>
 				</div>
@@ -78,7 +76,7 @@
 							<label>Telefone</label>
 							<input type="text"
 								id="telefone" 
-								ng-model="cliente.telefone"
+								ng-model="fornecedor.telefone"
 								class="form-control border-input" 
 								placeholder="(99) 99999-9999"
 								required="required">
@@ -88,7 +86,7 @@
 						<div class="form-group">
 							<label>E-mail</label>
 							<input type="email"
-								ng-model="cliente.email"
+								ng-model="fornecedor.email"
 								class="form-control border-input" 
 								placeholder="exemplo@teste.com"
 								required="required">
@@ -99,23 +97,23 @@
 				<div class="row">
 					<div class="col-md-3">
 						<div class="form-group">
-							<label>Sexo</label>
-							<select ng-model="cliente.sexo" class="form-control border-input">
-								<option value="Masculino">Masculino</option>
-								<option value="Feminino">Feminino</option>
-							</select>
+							<label>Inscrição Estadual</label>
+							<input type="inscricaoEstadual"
+								ng-model="fornecedor.inscricaoEstadual"
+								class="form-control border-input" 
+								placeholder="Somente números">
 						</div>
 					</div>
 					<div class="col-md-1">
 						<div class="form-group">
 							<label>Ativo</label>
-							<input type="checkbox" class="form-control border-input" ng-model="cliente.ativo">
+							<input type="checkbox" class="form-control border-input" ng-model="fornecedor.ativo">
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="form-group"> 
 						   <label>Estado</label> 
-							<select ng-model="cliente.estados.id"
+							<select ng-model="fornecedor.estados.id"
 								 id="selectEstados"
 								  class="form-control" onchange="javascript:carregarCidadesChrome(this);"> 
 								  <option value="">Selecione</option> 
@@ -130,7 +128,7 @@
 					<div class="col-md-5">
 						<div class="form-group"> 
 						   <label>Cidades</label> 
-							<select id="selectCidades" ng-model="cliente.cidades.id" 
+							<select id="selectCidades" ng-model="fornecedor.cidades.id" 
 							class="form-control"> 
 							<option value="">Selecione</option>
 							  <option
@@ -142,34 +140,10 @@
 					</div>
 				</div>
 				
-				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group">
-							<label>Programação</label>
-							<input type="radio" class="form-control border-input" name="interesse" 
-								ng-model="cliente.interesse" value="programacao" ng-checked="true">
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label>Banco de Dados</label>
-							<input type="radio" class="form-control border-input" name="interesse" 
-								ng-model="cliente.interesse" value="banco">
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label>Segurança da Informação</label>
-							<input type="radio" class="form-control border-input" name="interesse" 
-								ng-model="cliente.interesse" value="seguranca">
-						</div>
-					</div>
-				</div>
-				
 				<div class="text-center">
 					<button type="submit" class="btn btn-info btn-fill btn-wd">Cadastrar</button>
 					<button type="submit" class="btn btn-info btn-fill btn-wd"
-						ng-click="$scope.cliente={}">Limpar</button>
+						ng-click="$scope.fornecedor={}">Limpar</button>
 				</div>
 			</form>
 		</div>
@@ -178,6 +152,6 @@
 <!-- carrega as máscaras -->
 <script type="text/javascript">
 	$('#telefone').mask('(99) 99999-9999');
-	$('#cpf').mask('999.999.999-99');
+	$('#cnpj').mask('99.999.999/9999-99');
 </script>
 </html>

@@ -29,7 +29,7 @@ public class Cliente{
 	
 	private Boolean ativo;
 	
-	public String interesse;
+	private String interesse;
 	
 	private String cpf;
 	

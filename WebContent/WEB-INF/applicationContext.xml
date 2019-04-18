@@ -66,10 +66,10 @@
 		<constructor-arg value="angularjs_spring_mvc.model.Cidades" />
 	</bean>
 
-<!-- 	<bean id="fornecedorController" name="fornecedorController" -->
-<!-- 		class="curso.angular.controller.FornecedorController"> -->
-<!-- 		<constructor-arg value="curso.angular.model.Fornecedor" /> -->
-<!-- 	</bean> -->
+	<bean id="fornecedorController" name="fornecedorController"
+		class="angularjs_spring_mvc.controller.FornecedorController">
+		<constructor-arg value="angularjs_spring_mvc.model.Fornecedor" />
+	</bean>
 
 <!-- 	<bean id="livroController" name="livroController" -->
 <!-- 		class="curso.angular.controller.LivroController"> -->
