@@ -32,11 +32,18 @@ public class FornecedorController extends DaoImplementacao<Fornecedor> implement
 		return new ResponseEntity(HttpStatus.CREATED);
 	}
 	
-	//retorna a lista de fornecedores cadastrados
+	//retorna a lista de fornecedores cadastrados por páginas
 	@RequestMapping(value="listar/{numeroPagina}", method=RequestMethod.GET, headers = "Accept=application/json")
 	@ResponseBody
 	public String listar(@PathVariable("numeroPagina") String numeroPagina) throws Exception{		
 		return new Gson().toJson(super.consultaPaginada(numeroPagina));
+	}
+	
+	//retorna a lista de todos os fornecedores cadastrados
+	@RequestMapping(value="listartodos", method=RequestMethod.GET, headers = "Accept=application/json")
+	@ResponseBody
+	public String listartodos() throws Exception{		
+		return new Gson().toJson(super.lista());
 	}
 	
 	@RequestMapping(value="totalPagina", method=RequestMethod.GET, headers = "Accept=application/json")

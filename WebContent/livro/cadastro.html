@@ -1,0 +1,125 @@
+<html>
+<h1>Cadastro de livros</h1>
+
+<a href="#livrolist"> Lista de livros
+	<img alt="Editar" src="resources/img/list-icon.png">
+</a>
+<br>
+<br>
+
+<div class="col-lg-11 col-md-8" ng-init="listarFornecedores();">
+	<div class="card">
+		<div class="header">
+			<h4 class="title">Novo livro</h4>
+		</div>
+		<div class="content">
+			<form id="formLivro" ng-submit="salvarLivro();">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Código</label>
+							<input type="text" ng-model="livro.id"
+								class="form-control border-input" disabled>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<img alt="Foto" id="imagemLivro" src="" style="width: 118px; height: 140px; border: 0">
+							<input type="file" id="file" onchange="javascript:visualizarImg();">
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Título</label>
+								<input type="text" ng-model="livro.titulo"
+								class="form-control border-input"
+								placeholder="Título do livro"
+								required="required">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Autor(es)</label>
+								<input type="text" ng-model="livro.autor"
+								class="form-control border-input"
+								placeholder="Nome completo do(s) autor(es)"
+								required="required">
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>Decrição</label>
+								<input type="text" ng-model="livro.descricao"
+								class="form-control border-input"
+								placeholder="Resumo do livro"
+								required="required">
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>ISBN</label>
+							<input type="text"
+								ng-model="livro.isbn"
+								class="form-control border-input" 
+								placeholder="ISBN"
+								required="required">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Ano</label>
+							<input type="text"
+								ng-model="livro.ano"
+								class="form-control border-input" 
+								placeholder="Ano da publicação"
+								required="required">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Páginas</label>
+							<input type="text"
+								ng-model="livro.paginas"
+								class="form-control border-input" 
+								placeholder="Número de páginas do livro"
+								required="required">
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group"> 
+						   <label>Fornecedor</label> 
+							<select ng-model="livro.fornecedor.id"
+							id="selectFornecedor"
+							class="form-control"> 
+							<option value="">Selecione</option>
+							  <option
+								  ng-repeat="forn in fornecedoresList"
+								  value="{{forn.id}}">{{forn.razaoSocial}}
+							  </option>
+							</select>	
+						</div>
+					</div>
+				</div>
+				
+				<div class="text-center">
+					<button type="submit" class="btn btn-info btn-fill btn-wd">Cadastrar</button>
+					<button type="submit" class="btn btn-info btn-fill btn-wd"
+						ng-click="$scope.livro={}">Limpar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</html>
