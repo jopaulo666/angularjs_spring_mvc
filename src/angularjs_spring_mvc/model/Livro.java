@@ -1,5 +1,7 @@
 package angularjs_spring_mvc.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,11 +25,11 @@ public class Livro {
 	
 	private String descricao;
 	
-	private String isbn;
+	private Long isbn;
 	
-	private String ano;
+	private Long ano;
 	
-	private String paginas;
+	private Long paginas;
 	
 	@Column(columnDefinition="text")
 	private String foto;
@@ -35,6 +37,16 @@ public class Livro {
 	@ManyToOne(fetch=FetchType.EAGER) //tras o fornecedor
 	@ForeignKey(name="fornecedor_fk")
 	private Fornecedor fornecedor;
+	
+	private String valor = "";
+	
+	public String getValor() {
+		return valor;
+	}
+	
+	public void setValor(String valor) {
+		this.valor = valor;
+	}
 	
 	public String getTitulo() {
 		return titulo;
@@ -68,27 +80,27 @@ public class Livro {
 		this.descricao = descricao;
 	}
 
-	public String getIsbn() {
+	public Long getIsbn() {
 		return isbn;
 	}
 
-	public void setIsbn(String isbn) {
+	public void setIsbn(Long isbn) {
 		this.isbn = isbn;
 	}
 
-	public String getAno() {
+	public Long getAno() {
 		return ano;
 	}
 
-	public void setAno(String ano) {
+	public void setAno(Long ano) {
 		this.ano = ano;
 	}
 
-	public String getPaginas() {
+	public Long getPaginas() {
 		return paginas;
 	}
 
-	public void setPaginas(String paginas) {
+	public void setPaginas(Long paginas) {
 		this.paginas = paginas;
 	}
 

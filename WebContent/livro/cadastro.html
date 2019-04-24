@@ -55,10 +55,12 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>Decrição</label>
-								<input type="text" ng-model="livro.descricao"
+								<textarea cols="12" rows="5"
+								ng-model="livro.descricao"
 								class="form-control border-input"
-								placeholder="Resumo do livro"
+								placeholder="Decrição resumida do livro"
 								required="required">
+								</textarea>
 						</div>
 					</div>
 				</div>
@@ -67,7 +69,7 @@
 					<div class="col-md-4">
 						<div class="form-group">
 							<label>ISBN</label>
-							<input type="text"
+							<input type="number"
 								ng-model="livro.isbn"
 								class="form-control border-input" 
 								placeholder="ISBN"
@@ -77,7 +79,8 @@
 					<div class="col-md-4">
 						<div class="form-group">
 							<label>Ano</label>
-							<input type="text"
+							<input type="number"
+								id="ano"
 								ng-model="livro.ano"
 								class="form-control border-input" 
 								placeholder="Ano da publicação"
@@ -87,7 +90,7 @@
 					<div class="col-md-4">
 						<div class="form-group">
 							<label>Páginas</label>
-							<input type="text"
+							<input type="number"
 								ng-model="livro.paginas"
 								class="form-control border-input" 
 								placeholder="Número de páginas do livro"
@@ -111,6 +114,17 @@
 							</select>	
 						</div>
 					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Preço</label>
+							<input 
+								id="valor"
+								ng-model="livro.valor"
+								class="form-control border-input" 
+								placeholder="Preço do livro"
+								required="required">
+						</div>
+					</div>
 				</div>
 				
 				<div class="text-center">
@@ -122,4 +136,14 @@
 		</div>
 	</div>
 </div>
+<!-- carrega as máscaras -->
+<script type="text/javascript">
+	$('#ano').mask('9999');
+	$("#valor").maskMoney({
+		prefix : 'R$ ',
+		thousands : '.',
+		decimal : ',',
+		affixesStay : true
+	});
+</script>
 </html>
