@@ -33,8 +33,11 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label>Razação Social</label> <input type="text" ng-model="fornecedor.razaoSocial"
-								class="form-control border-input" placeholder="Razão Social"
+							<label>Razação Social</label>
+								<input type="text" ng-model="fornecedor.razaoSocial"
+								style="text-transform: capitalize;"
+								class="form-control border-input"
+								placeholder="Razão Social"
 								required="required">
 						</div>
 					</div>
@@ -42,8 +45,10 @@
 						<div class="form-group">
 							<label for="endereco">Nome Fantasia</label>
 								<input type="text" ng-model="fornecedor.nomeFantasia"
+								style="text-transform: capitalize;"
 								class="form-control border-input"
-								placeholder="Nome Fantasia" required="required">
+								placeholder="Nome Fantasia"
+								required="required">
 						</div>
 					</div>
 				</div>
@@ -64,8 +69,10 @@
 						<div class="form-group">
 							<label for="endereco">Endereço</label>
 								<input type="text" ng-model="fornecedor.endereco"
+								style="text-transform: capitalize;"
 								class="form-control border-input"
-								placeholder="Ex: Rua Presidente Vargas, 999" required="required">
+								placeholder="Ex: Rua Presidente Vargas, 999"
+								required="required">
 						</div>
 					</div>
 				</div>
@@ -87,6 +94,7 @@
 							<label>E-mail</label>
 							<input type="email"
 								ng-model="fornecedor.email"
+								style="text-transform: lowercase;"
 								class="form-control border-input" 
 								placeholder="exemplo@teste.com"
 								required="required">
@@ -146,6 +154,7 @@
 						ng-click="$scope.fornecedor={}">Limpar
 					</button>
 				</div>
+				<p class="text-right">*Obrigatório</p>
 			</form>
 		</div>
 	</div>

@@ -1,0 +1,44 @@
+<html>
+<h1>Loja online de livros</h1>
+
+<br>
+<br>
+
+<div class="col-lg-11 col-md-8" ng-init="listarLivros(1);">
+	<div class="card">
+		<div class="content">
+			<form id="formLivro">
+				<div class="row">
+					<div class="col-md-3" ng-repeat="livro in data">
+						<div class="form-group">
+							<label style="color: black;">{{livro.titulo}}</label>
+							<img alt="Foto" id="imagemLivro" src="{{livro.foto}}" 
+								style="width: 170px; height: 200px; border: 0">
+							<label>{{livro.autor}}</label>
+							<br/>
+							<a onclick="mostrarDescricao(this.title);" title="{{livro.descricao}}">Descrição</a>
+							<br/>
+							<label style="color:blue;">{{livro.valor}}</label>
+							<br/>
+							<button type="button" class="btn btn-success">Carrinho</button>
+						</div>
+					</div>
+				</div>
+			</form>
+			<br/>
+			<div class="text-center">
+				<button type="button" class="btn btn-info btn-fill btn-wd"
+					ng-click="anterior();">Anterior</button>
+				<button type="button" class="btn btn-info btn-fill btn-wd"
+					ng-click="proximo();">Próximo</button>
+			</div>
+		</div>
+	</div>
+	<div id="descricaolivro" title="Descrição resumida do livro"></div>
+	<script type="text/javascript">
+		function mostrarDescricao(descricao) {
+			$('$descricaolivro').html("<p>"+descricao+"</p>").dialog({modal:true});
+		}
+	</script>
+</div>
+</html>

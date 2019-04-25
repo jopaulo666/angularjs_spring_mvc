@@ -43,11 +43,48 @@ app.config(function($routeProvider, $provide, $httpProvider, $locationProvider) 
 		templateUrl: "livro/cadastro.html"
 	})//novo
 	
+	//-----------loja-------------------
+	.when("/loja/online", {
+		controller: "lojaController",
+		templateUrl: "loja/online.html"
+	})
+	
 	.otherwise({
 		redirectTo: "/"
 	});
 });
 
+//configurações da loja de livros
+app.controller("lojaController", function($scope, $http, $location, $routeParams) {
+	//lista todos os livros
+	$scope.listarLivros = function(numeroPagina) {
+		$scope.numeroPagina = numeroPagina;
+		$http.get("livro/listar/" + numeroPagina).success(function(response) {
+			$scope.data = response;
+			//---------Inicio total página----------
+			$http.get("livro/totalPagina").success(function(response) {
+				$scope.totalPagina = response;
+			}).error(function(response) {
+				erro("Error: " + response);
+			});
+			//---------Fim total página----------
+		}).error(function(response) {
+			erro("Erro" + response);
+		});
+	};
+	
+	$scope.proximo = function() {
+		if(new Number($scope.numeroPagina) < Number($scope.totalPagina)){
+			$scope.listarLivros(new Number($scope.numeroPagina + 1))
+		}
+	};
+	
+	$scope.anterior = function() {
+		if(new Number($scope.numeroPagina) > 1){
+			$scope.listarLivros(new Number($scope.numeroPagina - 1));
+		}
+	};
+});
 
 // configurações do controller de Fornecedor 
 app.controller("fornecedorController", function($scope, $http, $location, $routeParams) {

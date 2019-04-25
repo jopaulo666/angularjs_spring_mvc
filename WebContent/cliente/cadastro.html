@@ -33,8 +33,11 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label>Nome</label> <input type="text" ng-model="cliente.nome"
-								class="form-control border-input" placeholder="Nome completo"
+							<label>Nome</label>
+								<input type="text" ng-model="cliente.nome"
+								style="text-transform: capitalize;"
+								class="form-control border-input"
+								placeholder="Nome completo"
 								required="required">
 						</div>
 					</div>
@@ -42,8 +45,10 @@
 						<div class="form-group">
 							<label for="endereco">Endereço</label>
 								<input type="text" ng-model="cliente.endereco"
+								style="text-transform: capitalize;"
 								class="form-control border-input"
-								placeholder="Ex: Rua Presidente Vargas, 999" required="required">
+								placeholder="Ex: Rua Presidente Vargas, 999"
+								required="required">
 						</div>
 					</div>
 				</div>
@@ -171,6 +176,7 @@
 					<button type="submit" class="btn btn-info btn-fill btn-wd"
 						ng-click="$scope.cliente={}">Limpar</button>
 				</div>
+				<p class="text-right">*Obrigatório</p>
 			</form>
 		</div>
 	</div>
