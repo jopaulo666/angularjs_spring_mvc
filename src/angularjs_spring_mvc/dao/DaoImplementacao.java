@@ -1,11 +1,13 @@
 package angularjs_spring_mvc.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -78,9 +80,23 @@ public abstract class DaoImplementacao<T> implements DaoInterface<T>{
 		return persistenceClass;
 	}
 	
+	@Override
+	public List<T> lista(String ids) throws Exception {
+		List<Long> longs = new ArrayList<Long>();
+		
+		String[] strings = ids.split(",");
+		for (int i = 0; i < strings.length; i++) {
+			longs.add(Long.parseLong(strings[i]));
+		}
+		
+		Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(getPersistenceClass());
+		criteria.add(Restrictions.in("id", longs));
+		return criteria.list();
+	}
+	
 	// retorna a lista de objetos de acordo com a página offset
 	public List<T> consultaPaginada(String numeroPagina) throws Exception{
-		int total_por_pagina = 6;
+		int total_por_pagina = 8;
 		if (numeroPagina == null || (numeroPagina != null && numeroPagina.trim().isEmpty())) {
 			numeroPagina = "0";
 		}

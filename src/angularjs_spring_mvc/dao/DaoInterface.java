@@ -22,6 +22,8 @@ public interface DaoInterface<T> {
 	
 	List<T> lista() throws Exception;
 	
+	List<T> lista(String ids) throws Exception;
+	
 	T loadObjeto(Long codigo) throws Exception;
 	
 	int quantidadePagina() throws Exception;

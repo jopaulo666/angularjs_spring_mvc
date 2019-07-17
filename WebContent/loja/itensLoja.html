@@ -1,0 +1,48 @@
+<html ng-app="loja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<h1>Itens do carrinho</h1>
+
+<label>Filtro <input type="text" ng-model="filtro"></label>
+<br>
+<br>
+
+<div ng-controller="lojaController">
+
+	<div class="col-lg-12 col-md-8">
+		<div class="card">
+			<table class="table table-hover">
+				<thead>
+					<th>Código</th>
+					<th>Capa</th>
+					<th>Título</th>
+					<th>Quantidade</th>
+					<th>Valor</th>
+					<th>Excluir</th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in itensCarrinho | filter: filtro">
+						<td>{{item.livro.id}}</td>
+						<td>
+							<img src="{{item.livro.foto}}" style="width: 80px; height: 100px;" />
+						</td>
+						<td>{{item.livro.titulo}}</td>
+						<td>
+							<input type="number" value="{{item.quantidade}}"/>
+						</td>
+						<td>{{item.livro.valor}}</td>
+						<td>
+							<a href ng-click="removerLivroCarrinho(item.livro.id);">
+								<img alt="Remover" title="Excluir" 
+									src="resources/img/delete-icon.png">
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>			
+		</div>
+		<h1>TOTAL: {{pedidoObjeto.valorTotal}}</h1>
+	</div>
+</div>
+</html>

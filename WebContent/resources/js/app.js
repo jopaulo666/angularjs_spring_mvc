@@ -48,6 +48,10 @@ app.config(function($routeProvider, $provide, $httpProvider, $locationProvider) 
 		controller: "lojaController",
 		templateUrl: "loja/online.html"
 	})
+	.when("/loja/itensLoja/:itens", {
+		controller: "lojaController",
+		templateUrl: "loja/itensLoja.html"
+	})
 	
 	.otherwise({
 		redirectTo: "/"
@@ -56,6 +60,49 @@ app.config(function($routeProvider, $provide, $httpProvider, $locationProvider) 
 
 //configurações da loja de livros
 app.controller("lojaController", function($scope, $http, $location, $routeParams) {
+	
+	if ($routeParams.itens != null && $routeParams.itens.lenght > 0) {
+		$http.get("itempedido/processar/" + $routeParams.itens).success(function(response) {
+			
+			$scope.itensCarrinho = response;
+			$scope.pedidoObjeto = response[0].pedido;
+			
+		}).error(function(response) {
+			erro("Error: " + response);
+		});
+	} else {
+		$scope.carrinhoLivro = new Array();
+	}
+	
+	$scope.addLivro = function(livroid) {
+		$scope.carrinhoLivro.push(livroid);
+	};
+	
+	//------------------------------------------------------
+	$scope.removerLivroCarrinho = function(livroid) {
+		
+		$scope.itensTemp = new Array();
+		var valorTotal = new Number();
+		for (var i = 0; i < $scope.itensCarrinho.length; i++) {
+			if ($scope.itensCarrinho[i].livro.id === livroid) {
+				
+			} else {
+				// item válidos
+				$scope.itensTemp.push($scope.itensCarrinho[i]);
+				
+				var valorLivro = $scope.itensCarrinho[i].livro.valor.replace("R","").replace("$","")
+					.replace(".","").replace(",",".");
+				valorTotal += valorTotal + valorLivro;
+			}
+		}
+		$scope.pedidoObjeto.valorTotal;
+		$scope.itensCarrinho = $scope.itensTemp;
+	};
+	//--------------------------------------------------------
+	$scope.fecharPedido = function() {
+		$location.path('loja/itensLoja/' + $scope.carrinhoLivro);
+	};
+	
 	//lista todos os livros
 	$scope.listarLivros = function(numeroPagina) {
 		$scope.numeroPagina = numeroPagina;

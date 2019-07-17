@@ -1,8 +1,15 @@
 <html>
 <h1>Loja online de livros</h1>
+<br/>
+<br/>
 
-<br>
-<br>
+<a ng-click="fecharPedido();">
+	<img alt="Carrinho" title="Carrinho de compras" 
+		src="resources/img/carrinho.png" border="0" height="40px;" width="40px;">
+	Itens no carrinho: {{carrinhoLivro.length}}
+</a>
+<br/>
+<br/>
 
 <div class="col-lg-11 col-md-8" ng-init="listarLivros(1);">
 	<div class="card">
@@ -11,16 +18,16 @@
 				<div class="row">
 					<div class="col-md-3" ng-repeat="livro in data">
 						<div class="form-group">
-							<label style="color: black;">{{livro.titulo}}</label>
+							<label style="color: black; text-transform: capitalize;">{{livro.titulo}}</label>
 							<img alt="Foto" id="imagemLivro" src="{{livro.foto}}" 
 								style="width: 170px; height: 200px; border: 0">
-							<label>{{livro.autor}}</label>
+							<label style="text-transform: capitalize;">{{livro.autor}}</label>
 							<br/>
 							<a onclick="mostrarDescricao(this.title);" title="{{livro.descricao}}">Descrição</a>
 							<br/>
 							<label style="color:blue;">{{livro.valor}}</label>
 							<br/>
-							<button type="button" class="btn btn-success">Carrinho</button>
+							<button type="button" ng-click="addLivro(livro.id)" class="btn btn-success">Carrinho</button>
 						</div>
 					</div>
 				</div>
@@ -37,7 +44,7 @@
 	<div id="descricaolivro" title="Descrição resumida do livro"></div>
 	<script type="text/javascript">
 		function mostrarDescricao(descricao) {
-			$('$descricaolivro').html("<p>"+descricao+"</p>").dialog({modal:true});
+			$('$descricaoLivro').html("<p>"+descricao+"</p>").dialog({modal:true});
 		}
 	</script>
 </div>

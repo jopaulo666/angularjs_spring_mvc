@@ -33,16 +33,19 @@
 						<td>{{livro.id}}</td>
 						<td><img src="{{livro.foto}}"
 							style="width: 40px; height: 43px;" /></td>
-						<td>{{livro.titulo}}</td>
-						<td>{{livro.autor}}</td>
+						<td style="text-transform: capitalize;">{{livro.titulo}}</td>
+						<td style="text-transform: capitalize;">{{livro.autor}}</td>
 						<td>{{livro.valor}}</td>
-						<td><a href ng-click="removerLivro(livro.id);"> <img
-								alt="Remover" src="resources/img/delete-icon.png">
-						</a></td>
-						<td><a href ng-click="editarLivro(livro.id);"> <img
-								alt="Editar" src="resources/img/edit-icon.png"
-								ng-mouseover="Editar Livro">
-						</a></td>
+						<td>
+							<a href ng-click="removerLivro(livro.id);">
+								<img alt="Remover" title="Excluir" src="resources/img/delete-icon.png">
+							</a>
+						</td>
+						<td>
+							<a href ng-click="editarLivro(livro.id);">
+								<img alt="Editar" title="Editar" src="resources/img/edit-icon.png">
+							</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>

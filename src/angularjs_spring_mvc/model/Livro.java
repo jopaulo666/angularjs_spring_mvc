@@ -21,6 +21,7 @@ public class Livro {
 	
 	private String titulo;
 	
+	@Column(length = 300)
 	private String descricao;
 	
 	private Long isbn;

@@ -29,8 +29,8 @@
 		<mapping class="angularjs_spring_mvc.model.Cliente" />
 		<mapping class="angularjs_spring_mvc.model.Fornecedor" />
 		<mapping class="angularjs_spring_mvc.model.Livro" />
-<!-- 		<mapping class="angularjs_spring_mvc.model.Pedido" /> -->
-<!-- 		<mapping class="angularjs_spring_mvc.model.ItemPedido" /> -->
+		<mapping class="angularjs_spring_mvc.model.Pedido" />
+		<mapping class="angularjs_spring_mvc.model.ItemPedido" />
 		
 		
 	</session-factory>

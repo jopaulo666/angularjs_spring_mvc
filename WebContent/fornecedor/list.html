@@ -38,13 +38,16 @@
 						<td>{{fornecedor.endereco}}</td>
 						<td>{{fornecedor.telefone}}</td>
 						<td>{{fornecedor.email}}</td>
-						<td><a href ng-click="removerFornecedor(fornecedor.id);"> <img
-								alt="Remover" src="resources/img/delete-icon.png">
-						</a></td>
-						<td><a href ng-click="editarFornecedor(fornecedor.id);"> <img
-								alt="Editar" src="resources/img/edit-icon.png"
-								ng-mouseover="Editar Fornecedor">
-						</a></td>
+						<td>
+							<a href ng-click="removerFornecedor(fornecedor.id);">
+								<img alt="Remover" title="Excluir" src="resources/img/delete-icon.png">
+							</a>
+						</td>
+						<td>
+							<a href ng-click="editarFornecedor(fornecedor.id);">
+								<img alt="Editar" title="Editar" src="resources/img/edit-icon.png">
+							</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>

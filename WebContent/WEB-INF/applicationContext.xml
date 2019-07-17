@@ -76,15 +76,15 @@
 		<constructor-arg value="angularjs_spring_mvc.model.Livro" />
 	</bean>
 
-<!-- 	<bean id="itemPedidoController" name="itemPedidoController" -->
-<!-- 		class="curso.angular.controller.ItemPedidoController"> -->
-<!-- 		<constructor-arg value="curso.angular.model.ItemPedido" /> -->
-<!-- 	</bean> -->
+	<bean id="itemPedidoController" name="itemPedidoController"
+		class="angularjs_spring_mvc.controller.ItemPedidoController">
+		<constructor-arg value="angularjs_spring_mvc.model.ItemPedido" />
+	</bean>
 
-<!-- 	<bean id="pedidoController" name="pedidoController" -->
-<!-- 		class="curso.angular.controller.PedidoController"> -->
-<!-- 		<constructor-arg value="curso.angular.model.Pedido" /> -->
-<!-- 	</bean> -->
+	<bean id="pedidoController" name="pedidoController"
+		class="angularjs_spring_mvc.controller.PedidoController">
+		<constructor-arg value="angularjs_spring_mvc.model.Pedido" />
+	</bean>
 
 <!-- 	<bean id="fileDownloadController" name="fileDownloadController" -->
 <!-- 		class="curso.angular.controller.FileDownloadController"> -->
