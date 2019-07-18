@@ -2,9 +2,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
-<h1>Itens do carrinho</h1>
 
-<label>Filtro <input type="text" ng-model="filtro"></label>
+<h1>Itens no carrinho</h1>
+
+<label>Pesquisar clientes <br><input type="text" ng-model="filtroCliente"></label>
+<button type="button" class="btn btn-info btn-fill btn-wd" ng-click="anterior();">Buscar</button>
+<table>
+	<tr ng-repeat="cliente in clientePesquisa">
+		<td>{{cliente.id}}</td>
+		<td>{{cliente.nome}}</td>
+	</tr>
+</table>
+<br>
+<br>
+
+<label>Pesquisar livros <br><input type="text" ng-model="filtro"></label>
 <br>
 <br>
 
@@ -29,13 +41,14 @@
 						</td>
 						<td>{{item.livro.titulo}}</td>
 						<td>
-							<input type="number" value="{{item.quantidade}}"/>
+							<input type="number" value="{{item.quantidade}}"
+								ng-change="recalculo(item.quantidade, item.livro.id);"
+								ng-model="item.quantidade"/>
 						</td>
 						<td>{{item.livro.valor}}</td>
 						<td>
 							<a href ng-click="removerLivroCarrinho(item.livro.id);">
-								<img alt="Remover" title="Excluir" 
-									src="resources/img/delete-icon.png">
+								<img alt="Remover" title="Excluir" src="resources/img/delete-icon.png">
 							</a>
 						</td>
 					</tr>

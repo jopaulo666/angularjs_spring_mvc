@@ -1,49 +1,49 @@
 var app = angular.module('loja', [ 'ngRoute', 'ngResource', 'ngAnimate' ]);
 
 app.config(function($routeProvider, $provide, $httpProvider, $locationProvider) {
-	//-----------cliente-----------------
+	// -----------cliente-----------------
 	$routeProvider.when("/clientelist", {
 		controller: "clienteController",
 		templateUrl: "cliente/list.html"
-	})//listar
+	})// listar
 	.when("/clienteedit/:id", {
 		controller: "clienteController",
 		templateUrl: "cliente/cadastro.html"
-	})//editar
+	})// editar
 	.when("/cliente/cadastro", {
 		controller: "clienteController",
 		templateUrl: "cliente/cadastro.html"
-	})//novo
+	})// novo
 
-	//------------fornecedor-----------------
+	// ------------fornecedor-----------------
 	$routeProvider.when("/fornecedorlist", {
 		controller: "fornecedorController",
 		templateUrl: "fornecedor/list.html"
-	})//listar
+	})// listar
 	.when("/fornecedoredit/:id", {
 		controller: "fornecedorController",
 		templateUrl: "fornecedor/cadastro.html"
-	})//editar
+	})// editar
 	.when("/fornecedor/cadastro", {
 		controller: "fornecedorController",
 		templateUrl: "fornecedor/cadastro.html"
-	})//novo
+	})// novo
 	
-	//------------livro-----------------
+	// ------------livro-----------------
 	$routeProvider.when("/livrolist", {
 		controller: "livroController",
 		templateUrl: "livro/list.html"
-	})//listar
+	})// listar
 	.when("/livroedit/:id", {
 		controller: "livroController",
 		templateUrl: "livro/cadastro.html"
-	})//editar
+	})// editar
 	.when("/livro/cadastro", {
 		controller: "livroController",
 		templateUrl: "livro/cadastro.html"
-	})//novo
+	})// novo
 	
-	//-----------loja-------------------
+	// -----------loja-------------------
 	.when("/loja/online", {
 		controller: "lojaController",
 		templateUrl: "loja/online.html"
@@ -58,11 +58,12 @@ app.config(function($routeProvider, $provide, $httpProvider, $locationProvider) 
 	});
 });
 
-//configurações da loja de livros
+// configurações da loja de livros
 app.controller("lojaController", function($scope, $http, $location, $routeParams) {
 	
-	if ($routeParams.itens != null && $routeParams.itens.lenght > 0) {
-		$http.get("itempedido/processar/" + $routeParams.itens).success(function(response) {
+if ($routeParams.itens != null && $routeParams.itens.length > 0){
+		
+		$http.get("itempedido/processar/"+ $routeParams.itens).success(function(response) {
 			
 			$scope.itensCarrinho = response;
 			$scope.pedidoObjeto = response[0].pedido;
@@ -70,54 +71,74 @@ app.controller("lojaController", function($scope, $http, $location, $routeParams
 		}).error(function(response) {
 			erro("Error: " + response);
 		});
-	} else {
+		
+	}else {
 		$scope.carrinhoLivro = new Array();
 	}
 	
-	$scope.addLivro = function(livroid) {
+	$scope.addLivro = function (livroid) {
 		$scope.carrinhoLivro.push(livroid);
+		
 	};
 	
-	//------------------------------------------------------
-	$scope.removerLivroCarrinho = function(livroid) {
+	// -----------------------------------------------------
+	$scope.recalculo = function (quantidade, livro) {
+		var valorTotal = new Number();
+		for (var i = 0; i < $scope.itensCarrinho.length; i++){
+				var valorLivro = $scope.itensCarrinho[i].livro.valor.replace("R","").replace("$", "")
+					.replace(".","").replace(",", ".");
+				if ($scope.itensCarrinho[i].livro.id == livro){
+					valorTotal += parseFloat(valorLivro * quantidade);
+				}else {
+					valorTotal += parseFloat(valorLivro * $scope.itensCarrinho[i].quantidade);
+				}
+				
+		}
+		 $scope.pedidoObjeto.valorTotal = 'R$' + valorTotal.toString();
+	};
+	
+	// ------------------------------------------------------
+$scope.removerLivroCarrinho = function (livroid) {
 		
 		$scope.itensTemp = new Array();
 		var valorTotal = new Number();
-		for (var i = 0; i < $scope.itensCarrinho.length; i++) {
-			if ($scope.itensCarrinho[i].livro.id === livroid) {
-				
-			} else {
-				// item válidos
+		for (var i = 0; i < $scope.itensCarrinho.length; i++){
+			if ($scope.itensCarrinho[i].livro.id === livroid){
+			}else {
+				// itens validos
 				$scope.itensTemp.push($scope.itensCarrinho[i]);
 				
-				var valorLivro = $scope.itensCarrinho[i].livro.valor.replace("R","").replace("$","")
-					.replace(".","").replace(",",".");
-				valorTotal += valorTotal + valorLivro;
-			}
+				var valorLivro = $scope.itensCarrinho[i].livro.valor.replace("R","").replace("$", "").replace(".","").replace(",", ".");
+				valorTotal += parseFloat(valorTotal) + parseFloat(valorLivro * $scope.itensCarrinho[i].quantidade);
+				
+			};
 		}
-		$scope.pedidoObjeto.valorTotal;
-		$scope.itensCarrinho = $scope.itensTemp;
+		 $scope.pedidoObjeto.valorTotal = 'R$' + valorTotal.toString();
+		 $scope.itensCarrinho = $scope.itensTemp;
 	};
-	//--------------------------------------------------------
+	// --------------------------------------------------------
 	$scope.fecharPedido = function() {
 		$location.path('loja/itensLoja/' + $scope.carrinhoLivro);
 	};
 	
-	//lista todos os livros
+	// lista todos os livros
 	$scope.listarLivros = function(numeroPagina) {
 		$scope.numeroPagina = numeroPagina;
 		$http.get("livro/listar/" + numeroPagina).success(function(response) {
 			$scope.data = response;
-			//---------Inicio total página----------
-			$http.get("livro/totalPagina").success(function(response) {
-				$scope.totalPagina = response;
-			}).error(function(response) {
-				erro("Error: " + response);
-			});
-			//---------Fim total página----------
+			
+			//---------Inicio total p�gina----------
+				$http.get("livro/totalPagina").success(function(response) {
+					$scope.totalPagina = response;
+				}).error(function(response) {
+					erro("Error: " + response);
+				});
+			//---------Fim total p�gina----------
+			
 		}).error(function(response) {
-			erro("Erro" + response);
+			erro("Error: " + response);
 		});
+		
 	};
 	
 	$scope.proximo = function() {
@@ -133,15 +154,17 @@ app.controller("lojaController", function($scope, $http, $location, $routeParams
 	};
 });
 
-// configurações do controller de Fornecedor 
+// configurações do controller de Fornecedor
 app.controller("fornecedorController", function($scope, $http, $location, $routeParams) {
 	
 	if ($routeParams.id != null && $routeParams.id != undefined && $routeParams.id != '') {
-		//editar
+		// editar
 		$http.get("fornecedor/buscarfornecedor/" + $routeParams.id).success(function(response) {
 			$scope.fornecedor = response;
-			document.getElementById("imagemFornecedor").src = $scope.fornecedor.foto; // carrega img
-			//------------------ carrega estados e cidades do fornecedor em edição
+			document.getElementById("imagemFornecedor").src = $scope.fornecedor.foto; // carrega
+																						// img
+			// ------------------ carrega estados e cidades do fornecedor em
+			// edição
 			setTimeout(function () {
 				$("#selectEstados").prop('selectedIndex', (new Number($scope.fornecedor.estados.id) + 1));
 				
@@ -156,12 +179,12 @@ app.controller("fornecedorController", function($scope, $http, $location, $route
 				});
 			
 			}, 1000);
-			//----------------------
+			// ----------------------
 		}).error(function(data, status, headers, config) {
 			erro("Error: " + status);
 		});
 	} else {
-		//novo
+		// novo
 		$scope.fornecedor = {};
 	}
 	
@@ -176,25 +199,26 @@ app.controller("fornecedorController", function($scope, $http, $location, $route
 		
 		$http.post("fornecedor/salvar", $scope.fornecedor).success(function(response) {
 			$scope.fornecedor = {}; // limpa a tela e inicia um novo fornecedor
-			document.getElementById("imagemFornecedor").src = ''; // limpa a imagem
+			document.getElementById("imagemFornecedor").src = ''; // limpa a
+																	// imagem
 			sucesso("Fornecedor salvo com sucesso!");
 		}).error(function(data, status, headers, config) {
 			erro("Erro" + response);
 		});
 	};
 	
-	//lista todos os fornecedor
+	// lista todos os fornecedor
 	$scope.listarFornecedor = function(numeroPagina) {
 		$scope.numeroPagina = numeroPagina;
 		$http.get("fornecedor/listar/" + numeroPagina).success(function(response) {
 			$scope.data = response;
-			//---------Inicio total página----------
+			// ---------Inicio total página----------
 			$http.get("fornecedor/totalPagina").success(function(response) {
 				$scope.totalPagina = response;
 			}).error(function(response) {
 				erro("Error: " + response);
 			});
-			//---------Fim total página----------
+			// ---------Fim total página----------
 		}).error(function(response) {
 			erro("Erro" + response);
 		});
@@ -212,7 +236,7 @@ app.controller("fornecedorController", function($scope, $http, $location, $route
 		}
 	};
 	
-	//deleta fornecedor
+	// deleta fornecedor
 	$scope.removerFornecedor = function(codFornecedor) {
 		$http.delete("fornecedor/deletar/" + codFornecedor).success(function(response) {
 			$scope.listarFornecedor($scope.numeroPagina);
@@ -222,7 +246,7 @@ app.controller("fornecedorController", function($scope, $http, $location, $route
 		});
 	};
 	
-	//carrega as cidades de acordo com o estado passado por parâmetro
+	// carrega as cidades de acordo com o estado passado por parâmetro
 	$scope.carregarCidades = function(estado) {
 		if (identific_nav() != 'chrome'){
 			$http.get("cidades/listar/" + estado.id).success(function(response) {
@@ -243,16 +267,17 @@ app.controller("fornecedorController", function($scope, $http, $location, $route
 	};
 });
 
-//configurações do controller de Livro 
+// configurações do controller de Livro
 app.controller("livroController", function($scope, $http, $location, $routeParams) {
 	
 	if ($routeParams.id != null && $routeParams.id != undefined && $routeParams.id != '') {
-		//editar
+		// editar
 		$http.get("livro/buscarlivro/" + $routeParams.id).success(function(response) {
 			$scope.livro = response;
 			
-			document.getElementById("imagemLivro").src = $scope.livro.foto; // carrega img
-			//------------------ carrega forncedores do livro em edição			
+			document.getElementById("imagemLivro").src = $scope.livro.foto; // carrega
+																			// img
+			// ------------------ carrega forncedores do livro em edição
 				$http.get("fornecedor/listartodos").success(function(response) {
 					$scope.fornecedoreslist = response;
 					setTimeout(function () {
@@ -263,12 +288,12 @@ app.controller("livroController", function($scope, $http, $location, $routeParam
 					erro("Error: " + status);
 				});
 			
-			//----------------------
+			// ----------------------
 		}).error(function(data, status, headers, config) {
 			erro("Error: " + status);
 		});
 	} else {
-		//novo
+		// novo
 		$scope.livro = {};
 	}
 	
@@ -284,25 +309,26 @@ app.controller("livroController", function($scope, $http, $location, $routeParam
 		
 		$http.post("livro/salvar", $scope.livro).success(function(response) {
 			$scope.livro = {}; // limpa a tela e inicia um novo livro
-			document.getElementById("imagemLivro").src = ''; // limpa a imagem
+			document.getElementById("imagemLivro").src = ''; // limpa a
+																// imagem
 			sucesso("Livro salvo com sucesso!");
 		}).error(function(data, status, headers, config) {
 			erro("Erro" + response);
 		});
 	};
 	
-	//lista todos os livros
+	// lista todos os livros
 	$scope.listarLivros = function(numeroPagina) {
 		$scope.numeroPagina = numeroPagina;
 		$http.get("livro/listar/" + numeroPagina).success(function(response) {
 			$scope.data = response;
-			//---------Inicio total página----------
+			// ---------Inicio total página----------
 			$http.get("livro/totalPagina").success(function(response) {
 				$scope.totalPagina = response;
 			}).error(function(response) {
 				erro("Error: " + response);
 			});
-			//---------Fim total página----------
+			// ---------Fim total página----------
 		}).error(function(response) {
 			erro("Erro" + response);
 		});
@@ -320,7 +346,7 @@ app.controller("livroController", function($scope, $http, $location, $routeParam
 		}
 	};
 	
-	//deleta livro
+	// deleta livro
 	$scope.removerLivro = function(codLivro) {
 		$http.delete("livro/deletar/" + codLivro).success(function(response) {
 			$scope.listarLivros($scope.numeroPagina);
@@ -339,15 +365,16 @@ app.controller("livroController", function($scope, $http, $location, $routeParam
 	}
 });
 
-//configurações do controller de Cliente 
+// configurações do controller de Cliente
 app.controller("clienteController", function($scope, $http, $location, $routeParams) {
 	
 	if ($routeParams.id != null && $routeParams.id != undefined && $routeParams.id != '') {
-		//editar
+		// editar
 		$http.get("cliente/buscarcliente/" + $routeParams.id).success(function(response) {
 			$scope.cliente = response;
-			document.getElementById("imagemCliente").src = $scope.cliente.foto; // carrega img
-			//------------------ carrega estados e cidades do cliente em edição
+			document.getElementById("imagemCliente").src = $scope.cliente.foto; // carrega
+																				// img
+			// ------------------ carrega estados e cidades do cliente em edição
 			setTimeout(function () {
 				$("#selectEstados").prop('selectedIndex', (new Number($scope.cliente.estados.id) + 1));
 				
@@ -362,12 +389,12 @@ app.controller("clienteController", function($scope, $http, $location, $routePar
 				});
 			
 			}, 1000);
-			//----------------------
+			// ----------------------
 		}).error(function(data, status, headers, config) {
 			erro("Error: " + status);
 		});
 	} else {
-		//novo
+		// novo
 		$scope.cliente = {};
 	}
 	
@@ -382,25 +409,26 @@ app.controller("clienteController", function($scope, $http, $location, $routePar
 		
 		$http.post("cliente/salvar", $scope.cliente).success(function(response) {
 			$scope.cliente = {}; // limpa a tela e inicia um novo cliente
-			document.getElementById("imagemCliente").src = ''; // limpa a imagem
+			document.getElementById("imagemCliente").src = ''; // limpa a
+																// imagem
 			sucesso("Cliente salvo com sucesso!");
 		}).error(function(data, status, headers, config) {
 			erro("Erro" + response);
 		});
 	};
 	
-	//lista todos os clientes
+	// lista todos os clientes
 	$scope.listarClientes = function(numeroPagina) {
 		$scope.numeroPagina = numeroPagina;
 		$http.get("cliente/listar/" + numeroPagina).success(function(response) {
 			$scope.data = response;
-			//---------Inicio total página----------
+			// ---------Inicio total página----------
 			$http.get("cliente/totalPagina").success(function(response) {
 				$scope.totalPagina = response;
 			}).error(function(response) {
 				erro("Error: " + response);
 			});
-			//---------Fim total página----------
+			// ---------Fim total página----------
 		}).error(function(response) {
 			erro("Erro" + response);
 		});
@@ -418,7 +446,7 @@ app.controller("clienteController", function($scope, $http, $location, $routePar
 		}
 	};
 	
-	//deleta cliente
+	// deleta cliente
 	$scope.removerCliente = function(codCliente) {
 		$http.delete("cliente/deletar/" + codCliente).success(function(response) {
 			$scope.listarClientes($scope.numeroPagina);
@@ -428,7 +456,7 @@ app.controller("clienteController", function($scope, $http, $location, $routePar
 		});
 	};
 	
-	//carrega as cidades de acordo com o estado passado por parâmetro
+	// carrega as cidades de acordo com o estado passado por parâmetro
 	$scope.carregarCidades = function(estado) {
 		if (identific_nav() != 'chrome'){
 			$http.get("cidades/listar/" + estado.id).success(function(response) {
@@ -467,7 +495,8 @@ function erro(msg) {
 	});
 };
 
-// faz a identificação da ṕosição correta da cidade do registro para mostrar edição
+// faz a identificação da ṕosição correta da cidade do registro para mostrar
+// edição
 function buscarKeyJson(obj, key, value) {
 	for (var i = 0; i < obj.length; i++) {
 		if (obj[i][key] == value) {
@@ -477,7 +506,7 @@ function buscarKeyJson(obj, key, value) {
 	return null;
 }
 
-//carregar cidades quando é navegador chrome usando jQuery
+// carregar cidades quando é navegador chrome usando jQuery
 function carregarCidadesChrome(estado) {
 	if (identific_nav() === 'chrome') {// executa se for chrome
 		$.get("cidades/listarchrome", { idEstado : estado.value}, function(data) {
@@ -494,7 +523,9 @@ function carregarCidadesChrome(estado) {
 // add imagem ao campo html img
 function visualizarImg() {
 	var preview = document.querySelectorAll('img').item(1);
-	var file = document.querySelector('input[type=file]').files[0]; //pega a img selecionada
+	var file = document.querySelector('input[type=file]').files[0]; // pega a
+																	// img
+																	// selecionada
 	var reader = new FileReader();
 	
 	reader.onloadend = function() {
@@ -527,17 +558,3 @@ function identific_nav(){
     	alert("Navegador desconhecido!");
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

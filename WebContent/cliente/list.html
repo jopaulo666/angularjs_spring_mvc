@@ -34,16 +34,15 @@
 						<td>{{cliente.id}}</td>
 						<td><img src="{{cliente.foto}}"
 							style="width: 40px; height: 43px;" /></td>
-						<td>{{cliente.nome}}</td>
-						<td>{{cliente.endereco}}</td>
+						<td style="text-transform: capitalize;">{{cliente.nome}}</td>
+						<td style="text-transform: capitalize;">{{cliente.endereco}}</td>
 						<td>{{cliente.telefone}}</td>
-						<td>{{cliente.email}}</td>
+						<td style="text-transform: lowercase;">{{cliente.email}}</td>
 						<td><a href ng-click="removerCliente(cliente.id);"> <img
 								alt="Remover" title="Excluir" src="resources/img/delete-icon.png">
 						</a></td>
 						<td><a href ng-click="editarCliente(cliente.id);"> <img
-								alt="Editar" title="Editar" src="resources/img/edit-icon.png"
-								ng-mouseover="Editar Cliente">
+								alt="Editar" title="Editar" src="resources/img/edit-icon.png">
 						</a></td>
 					</tr>
 				</tbody>
