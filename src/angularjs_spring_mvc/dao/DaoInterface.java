@@ -24,6 +24,10 @@ public interface DaoInterface<T> {
 	
 	List<T> lista(String ids) throws Exception;
 	
+	List<T> lista(String campoBanco, String valorCampo) throws Exception;
+	
+	List<T> listaLikeExpression(String campoBanco, String valorCampo) throws Exception;
+	
 	T loadObjeto(Long codigo) throws Exception;
 	
 	int quantidadePagina() throws Exception;

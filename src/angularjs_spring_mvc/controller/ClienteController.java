@@ -1,5 +1,8 @@
 package angularjs_spring_mvc.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -59,6 +62,16 @@ public class ClienteController extends DaoImplementacao<Cliente> implements
 			return "{}";
 		}
 		return new Gson().toJson(objeto);
+	}
+	
+	@RequestMapping(value="buscarnome/{nomeCliente}", method=RequestMethod.GET)
+	public @ResponseBody String buscarNome(@PathVariable("nomeCliente") String nomeCliente) throws Exception{
+		List<Cliente> clientes = new ArrayList<Cliente>();
+		clientes = super.listaLikeExpression("nome", nomeCliente);
+ 		if (clientes == null || clientes.isEmpty()) {
+			return "{}";
+		}
+		return new Gson().toJson(clientes);
 	}
 
 }

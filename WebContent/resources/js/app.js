@@ -61,6 +61,23 @@ app.config(function($routeProvider, $provide, $httpProvider, $locationProvider) 
 // configurações da loja de livros
 app.controller("lojaController", function($scope, $http, $location, $routeParams) {
 	
+	//---------Pesquisar cliente----------
+	$scope.buscarClienteNome = function () {
+		$http.get("cliente/buscarnome/" + $scope.filtroCliente).success(function(response) {
+			$scope.clientesPesquisa = response;
+		}).error(function(response) {
+			erro("Error: " + response);
+		});
+	};
+	
+	//---------Adicionar cliente----------
+	$scope.adicionarClienteCarrinho = function (cliente) {
+		$scope.pedidoObjeto.cliente = cliente;
+		$scope.clienteAdiconado = cliente;
+		$scope.clientesPesquisa = {};
+		$scope.filtroCliente = "";
+	};
+	
 if ($routeParams.itens != null && $routeParams.itens.length > 0){
 		
 		$http.get("itempedido/processar/"+ $routeParams.itens).success(function(response) {
@@ -94,7 +111,7 @@ if ($routeParams.itens != null && $routeParams.itens.length > 0){
 				}
 				
 		}
-		 $scope.pedidoObjeto.valorTotal = 'R$' + valorTotal.toString();
+		 $scope.pedidoObjeto.valorTotal = 'R$ ' + valorTotal.toString();
 	};
 	
 	// ------------------------------------------------------
@@ -113,7 +130,7 @@ $scope.removerLivroCarrinho = function (livroid) {
 				
 			};
 		}
-		 $scope.pedidoObjeto.valorTotal = 'R$' + valorTotal.toString();
+		 $scope.pedidoObjeto.valorTotal = 'R$ ' + valorTotal.toString();
 		 $scope.itensCarrinho = $scope.itensTemp;
 	};
 	// --------------------------------------------------------

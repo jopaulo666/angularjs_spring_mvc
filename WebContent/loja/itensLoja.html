@@ -5,20 +5,41 @@
 
 <h1>Itens no carrinho</h1>
 
-<label>Pesquisar clientes <br><input type="text" ng-model="filtroCliente"></label>
-<button type="button" class="btn btn-info btn-fill btn-wd" ng-click="anterior();">Buscar</button>
-<table>
-	<tr ng-repeat="cliente in clientePesquisa">
+<label>Pesquisar cliente
+	<input class="form-control" type="text"	ng-model="filtroCliente">
+</label>
+
+<button type="button" class="btn btn-info btn-fill btn-wd" ng-click="buscarClienteNome();">Buscar</button>
+
+<table class="table table-hover">
+	<tr ng-repeat="cliente in clientesPesquisa">
 		<td>{{cliente.id}}</td>
 		<td>{{cliente.nome}}</td>
+		<td>
+			<a href ng-click="adicionarClienteCarrinho(cliente);">Adicionar
+				<img alt="Adicionar Cliente" title="Adicionar Cliente"
+					src="resources/img/add-icon.png" border="0">
+			</a>
+		</td>
 	</tr>
 </table>
-<br>
-<br>
+<br />
+<br />
 
-<label>Pesquisar livros <br><input type="text" ng-model="filtro"></label>
+<label>Cliente</label>
+<input class="form-control" style="max-width: 100px;"
+	ng-model="pedidoObjeto.cliente.id" value="{{pedidoObjeto.cliente.id}}"
+	readonly="readonly" type="text" id="idCliente" />
+<br>
+<input class="form-control" style="max-width: 600px;"
+	ng-model="pedidoObjeto.cliente.nome" value="{{pedidoObjeto.cliente.nome}}"
+	readonly="readonly" type="text" id="nomeCliente" />
 <br>
 <br>
+<label>Pesquisar livros<input class="form-control" type="text"
+	ng-model="filtro"></label>
+<br>
+<br />
 
 <div ng-controller="lojaController">
 
@@ -36,24 +57,20 @@
 				<tbody>
 					<tr ng-repeat="item in itensCarrinho | filter: filtro">
 						<td>{{item.livro.id}}</td>
-						<td>
-							<img src="{{item.livro.foto}}" style="width: 80px; height: 100px;" />
-						</td>
-						<td>{{item.livro.titulo}}</td>
-						<td>
-							<input type="number" value="{{item.quantidade}}"
-								ng-change="recalculo(item.quantidade, item.livro.id);"
-								ng-model="item.quantidade"/>
-						</td>
+						<td><img src="{{item.livro.foto}}"
+							style="width: 80px; height: 100px;" /></td>
+						<td style="text-transform: capitalize;">{{item.livro.titulo}}</td>
+						<td><input type="number" value="{{item.quantidade}}"
+							ng-change="recalculo(item.quantidade, item.livro.id);"
+							ng-model="item.quantidade" /></td>
 						<td>{{item.livro.valor}}</td>
-						<td>
-							<a href ng-click="removerLivroCarrinho(item.livro.id);">
-								<img alt="Remover" title="Excluir" src="resources/img/delete-icon.png">
-							</a>
-						</td>
+						<td><a href ng-click="removerLivroCarrinho(item.livro.id);">
+								<img alt="Remover" title="Excluir"
+								src="resources/img/delete-icon.png">
+						</a></td>
 					</tr>
 				</tbody>
-			</table>			
+			</table>
 		</div>
 		<h1>TOTAL: {{pedidoObjeto.valorTotal}}</h1>
 	</div>
