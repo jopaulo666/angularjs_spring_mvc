@@ -67,7 +67,7 @@ public class ClienteController extends DaoImplementacao<Cliente> implements
 	@RequestMapping(value="buscarnome/{nomeCliente}", method=RequestMethod.GET)
 	public @ResponseBody String buscarNome(@PathVariable("nomeCliente") String nomeCliente) throws Exception{
 		List<Cliente> clientes = new ArrayList<Cliente>();
-		clientes = super.listaLikeExpression("nome", nomeCliente);
+		clientes = super.lista("nome", nomeCliente);
  		if (clientes == null || clientes.isEmpty()) {
 			return "{}";
 		}

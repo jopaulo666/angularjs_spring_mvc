@@ -95,9 +95,9 @@ public abstract class DaoImplementacao<T> implements DaoInterface<T>{
 	public List<T> listaLikeExpression(String campoBanco, String valorCampo) throws Exception {		 
 		return getSessionFactory()
 				.getCurrentSession()
-				.createQuery(" select a from "
+				.createQuery(" SELECT a FROM "
 						+ getPersistenceClass().getSimpleName()
-						+ " a where a." + campoBanco + " like'%" + valorCampo + "%'")
+						+ " a WHERE a." + campoBanco + "like'%" + valorCampo + "%'")
 				.list();
 	}
 	

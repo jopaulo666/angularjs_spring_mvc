@@ -52,6 +52,10 @@ app.config(function($routeProvider, $provide, $httpProvider, $locationProvider) 
 		controller: "lojaController",
 		templateUrl: "loja/itensLoja.html"
 	})
+	.when("/loja/pedidoconfirmado/:codigoPedido", {
+		controller: "lojaController",
+		templateUrl: "loja/pedidoconfirmado.html"
+	})
 	
 	.otherwise({
 		redirectTo: "/"
@@ -60,6 +64,27 @@ app.config(function($routeProvider, $provide, $httpProvider, $locationProvider) 
 
 // configurações da loja de livros
 app.controller("lojaController", function($scope, $http, $location, $routeParams) {
+	
+	//--------finalizar pedido
+	if ($routeParams.codigoPedido != null) {
+		$scope.codigoPedido = $routeParams.codigoPedido;
+	}
+	
+	$scope.finalizarPedido = function() {
+		
+		$scope.pedidoObjeto.cliente = $scope.clienteAdiconado;
+		
+		$http.post("pedido/finalizar", {"pedido" : $scope.pedidoObjeto, "itens" : $scope.itensCarrinho}).success(function(response) {
+			$scope.pedidoObjeto = {};
+			$scope.itensCarrinho = {};
+			
+			$location.path("loja/pedidoconfirmado/" + response);
+			
+			sucesso("Pedido finalizado com sucesso!");
+		}).error(function(data, status, headers, config) {
+			erro("Erro" + response);
+		});
+	};
 	
 	//---------Pesquisar cliente----------
 	$scope.buscarClienteNome = function () {
