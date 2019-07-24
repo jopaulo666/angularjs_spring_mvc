@@ -50,7 +50,7 @@ public class ClienteController extends DaoImplementacao<Cliente> implements
 	
 	@RequestMapping(value="deletar/{codCliente}", method=RequestMethod.DELETE)
 	public @ResponseBody String deletar(@PathVariable("codCliente") String codCliente) throws Exception{
-		Cliente objeto = new Cliente();
+//		Cliente objeto = new Cliente();
 		super.deletar(loadObjeto(Long.parseLong(codCliente)));
 		return "";
 	}

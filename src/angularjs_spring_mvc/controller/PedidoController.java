@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,10 +50,20 @@ public class PedidoController extends DaoImplementacao<Pedido> implements DaoInt
 		return pedido.getId().toString();
 	}
 	
-	/*@RequestMapping(value = "listar", method = RequestMethod.GET, headers = "Accept=application/json")
+	@RequestMapping(value = "listar", method = RequestMethod.GET, headers = "Accept=application/json")
 	@ResponseBody
 	public String listar() throws Exception {
 		return new Gson().toJson(super.lista());
-	}*/
+	}
+	
+	@RequestMapping(value="deletar/{codPedido}", method=RequestMethod.DELETE)
+	public @ResponseBody String deletar(@PathVariable("codPedido") String codPedido) throws Exception{
+		List<ItemPedido> itemPedidos = itemPedidoController.lista("pedido.id", Long.parseLong(codPedido));
+		for (ItemPedido itemPedido : itemPedidos) {
+			itemPedidoController.deletar(itemPedido);
+		}
+		super.deletar(loadObjeto(Long.parseLong(codPedido)));
+		return new Gson().toJson(super.lista());
+	}
 
 }

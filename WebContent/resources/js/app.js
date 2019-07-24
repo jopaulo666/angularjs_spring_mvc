@@ -56,6 +56,10 @@ app.config(function($routeProvider, $provide, $httpProvider, $locationProvider) 
 		controller: "lojaController",
 		templateUrl: "loja/pedidoconfirmado.html"
 	})
+	.when("/loja/pedidos/", {
+		controller: "lojaController",
+		templateUrl: "loja/pedidos.html"
+	})
 	
 	.otherwise({
 		redirectTo: "/"
@@ -64,6 +68,25 @@ app.config(function($routeProvider, $provide, $httpProvider, $locationProvider) 
 
 // configurações da loja de livros
 app.controller("lojaController", function($scope, $http, $location, $routeParams) {
+	
+	//--------listar pedidos
+	$scope.listarPedidos = function () {
+		$http.get("pedido/listar").success(function(response) {
+			$scope.pedidosData = response;
+		}).error(function(response) {
+			erro("Error: " + response);
+		});
+	};
+	
+	//--------remover pedido
+	$scope.removerPedido = function (codPedido) {
+		$http.delete("pedido/deletar/" + codPedido).success(function(response) {
+				$scope.pedidosData = response;
+				sucesso("Pedido excluido com sucesso!");
+			}).error(function(response) {
+				erro("Error: " + response);
+			});
+	};
 	
 	//--------finalizar pedido
 	if ($routeParams.codigoPedido != null) {

@@ -92,6 +92,15 @@ public abstract class DaoImplementacao<T> implements DaoInterface<T>{
 	
 	@SuppressWarnings("unchecked")
 	@Override
+	public List<T> lista(String campoBanco, Long valorCampo) throws Exception {
+		Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(getPersistenceClass());
+		criteria.add(Restrictions.eq(campoBanco, valorCampo));
+		criteria.addOrder(Order.asc("id"));
+		return criteria.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
 	public List<T> listaLikeExpression(String campoBanco, String valorCampo) throws Exception {		 
 		return getSessionFactory()
 				.getCurrentSession()
