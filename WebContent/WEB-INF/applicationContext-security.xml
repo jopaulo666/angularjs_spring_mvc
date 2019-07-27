@@ -9,7 +9,7 @@
 	<global-method-security secured-annotations="enabled" />
 
 	<http auto-config="true" 
-		access-denied-page="/negado/acesso-negado.html"
+		access-denied-page="/negado/acesso_negado.html"
 		use-expressions="true">
 
 		<intercept-url pattern="/publico/**" access="permitAll" /> 

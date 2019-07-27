@@ -90,7 +90,8 @@
 		class="angularjs_spring_mvc.controller.FileDownloadController">
 	</bean>
 
-	<bean id="reportUtil" name="reportUtil" class="angularjs_spring_mvc.controller.ReportUtil">
+	<bean id="reportUtil" name="reportUtil"
+		class="angularjs_spring_mvc.controller.ReportUtil">
 	</bean>
 
 </beans>

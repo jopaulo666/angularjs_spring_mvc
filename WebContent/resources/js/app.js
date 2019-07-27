@@ -60,6 +60,10 @@ app.config(function($routeProvider, $provide, $httpProvider, $locationProvider) 
 		controller: "lojaController",
 		templateUrl: "loja/pedidos.html"
 	})
+	.when("/grafico/media_pedido", {
+		controller: "lojaController",
+		templateUrl: "/grafico/media_pedido.html"
+	})
 	
 	.otherwise({
 		redirectTo: "/"

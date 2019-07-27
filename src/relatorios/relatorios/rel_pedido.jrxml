@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rel_pedido" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="58c013df-5a2c-4a8e-8ac9-aec238c136b7">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="angularjs_spring_restful"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value="cGVkaWRvICwxNjIsMzAsNzRiNjRjOTEtZjlmMy00NTQ3LTgyOGQtNGZjZGFlNWMxYmFiO2l0ZW1w&#xA;ZWRpZG8gLDE1LDE1LDVkM2NhYWE3LTI2YTMtNGI3OS1iZmFlLTc1YWE2OWRlMzdiYzs=&#xA;"/>
+	<queryString>
+		<![CDATA[SELECT pedido.cliente_id,
+	pedido.data,
+	itempedido.livro_id,
+	itempedido.quantidade,
+	itempedido.pedido_id,
+	pedido.valortotal
+FROM itempedido
+	INNER JOIN pedido ON 
+	 itempedido.pedido_id = pedido.id]]>
+	</queryString>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

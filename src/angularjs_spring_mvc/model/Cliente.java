@@ -21,7 +21,13 @@ public class Cliente{
 	
 	private String endereco;
 	
+	private String numero;
+	
+	private String bairro;
+	
 	private String telefone;
+	
+	private String celular;
 	
 	private String email;
 	
@@ -34,6 +40,12 @@ public class Cliente{
 	private String cpf;
 	
 	private String rg;
+	
+	private String nascimento;
+	
+	private String complemento;
+	
+	private String cep;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@ForeignKey(name="estados_fk")
@@ -175,5 +187,53 @@ public class Cliente{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public String getNascimento() {
+		return nascimento;
+	}
+
+	public void setNascimento(String nascimento) {
+		this.nascimento = nascimento;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 }

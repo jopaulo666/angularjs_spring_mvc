@@ -14,6 +14,7 @@
 		</div>
 		<div class="content">
 			<form id="formCliente" ng-submit="salvarCliente();">
+				
 				<div class="row">
 					<div class="col-md-3">
 						<div class="form-group">
@@ -43,19 +44,6 @@
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="endereco">Endereço</label>
-								<input type="text" ng-model="cliente.endereco"
-								style="text-transform: capitalize;"
-								class="form-control border-input"
-								placeholder="Ex: Rua Presidente Vargas, 999"
-								required="required">
-						</div>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
 							<label>CPF</label>
 							<input type="text"
 								id="cpf"
@@ -65,30 +53,33 @@
 								required="required">
 						</div>
 					</div>
+				</div>				
+				
+				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>RG</label>
 							<input type="text"
-								id="cpf"
+								id="rg"
 								ng-model="cliente.rg"
 								class="form-control border-input"
 								placeholder="Somente números">
 						</div>
 					</div>
-				</div>
-
-				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label>Telefone</label>
-							<input type="text"
-								id="telefone" 
-								ng-model="cliente.telefone"
-								class="form-control border-input" 
-								placeholder="(99) 99999-9999"
+							<label>Data de nascimeto</label>
+							<input type="test"
+								id="nascimento"
+								ng-model="cliente.nascimento"
+								class="form-control border-input"
+								placeholder="  /  /    "
 								required="required">
 						</div>
 					</div>
+				</div>
+
+				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>E-mail</label>
@@ -98,6 +89,80 @@
 								class="form-control border-input" 
 								placeholder="exemplo@teste.com"
 								required="required">
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Celular</label>
+							<input type="text"
+								id="celular" 
+								ng-model="cliente.celular"
+								class="form-control border-input" 
+								placeholder="(99) 99999-9999"
+								required="required">
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Telefone (Opcional)</label>
+							<input type="text"
+								id="telefone" 
+								ng-model="cliente.telefone"
+								class="form-control border-input" 
+								placeholder="(99) 9999-9999">
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-2">
+						<div class="form-group">
+							<label for="numero">Nº</label>
+								<input type="text" ng-model="cliente.numero"
+								class="form-control border-input"
+								placeholder="999"
+								required="required">
+						</div>
+					</div>
+					<div class="col-md-7">
+						<div class="form-group">
+							<label for="endereco">Endereço</label>
+								<input type="text" ng-model="cliente.endereco"
+								style="text-transform: capitalize;"
+								class="form-control border-input"
+								placeholder="Ex: Rua Presidente Vargas"
+								required="required">
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="cep">CEP</label>
+								<input type="text" ng-model="cliente.cep"
+								id="cep"
+								class="form-control border-input"
+								placeholder="99999-999"
+								required="required">
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="bairro">Bairro</label>
+								<input type="text" ng-model="cliente.bairro"
+								style="text-transform: capitalize;"
+								class="form-control border-input"
+								placeholder="Ex: Batista Campos"
+								required="required">
+						</div>
+					</div>
+					<div class="col-md-8">
+						<div class="form-group">
+							<label for="complemento">Complemento (Opcional)</label>
+								<input type="text" ng-model="cliente.complemento"
+								class="form-control border-input"
+								placeholder="Ex: Ao lado de um farmácia">
 						</div>
 					</div>
 				</div>
@@ -177,14 +242,16 @@
 					<button type="submit" class="btn btn-info btn-fill btn-wd"
 						ng-click="$scope.cliente={}">Limpar</button>
 				</div>
-				<p class="text-right">*Obrigatório</p>
 			</form>
 		</div>
 	</div>
 </div>
 <!-- carrega as máscaras -->
 <script type="text/javascript">
-	$('#telefone').mask('(99) 99999-9999');
+	$('#celular').mask('(99) 99999-9999');
+	$('#telefone').mask('(99) 9999-9999');
 	$('#cpf').mask('999.999.999-99');
+	$('#nascimento').mask('99/99/9999');
+	$('#cep').mask('99999-999');
 </script>
 </html>

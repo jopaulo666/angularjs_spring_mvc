@@ -57,8 +57,7 @@ public class FileDownloadController {
 		ServletContext context = request.getServletContext();
 		
 		Pedido pedido = pedidoController.loadObjeto(Long.parseLong(codigoPedido));
-		ArrayList<ItemPedido> itemPedidos =(ArrayList<ItemPedido>) itemPedidoController
-				.lista("pedido.id", Long.parseLong(codigoPedido));
+		ArrayList<ItemPedido> itemPedidos =(ArrayList<ItemPedido>) itemPedidoController.lista("pedido.id", Long.parseLong(codigoPedido));
 		
 		PedidoBean pedidoBean = new PedidoBean(); 
 		pedidoBean.setPedido(pedido);

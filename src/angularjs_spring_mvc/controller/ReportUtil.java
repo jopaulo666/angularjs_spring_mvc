@@ -24,7 +24,7 @@ public class ReportUtil implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private static final String FOLDER_RELATORIOS = "/relatorios";
+	private static final String FOLDER_RELATORIOS = "/relatorios/relatorios";
 	private static final String SUBREPORT_DIR = "SUBREPORT_DIR";
 	private String SEPARATOR = File.separator;
 	private String caminhoArquivoRelatorio = null;
