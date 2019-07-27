@@ -1,3 +1,6 @@
+var permissao = false;
+
+// configuração do módulo
 var app = angular.module('loja', [ 'ngRoute', 'ngResource', 'ngAnimate' ]);
 
 app.config(function($routeProvider, $provide, $httpProvider, $locationProvider) {
@@ -62,7 +65,7 @@ app.config(function($routeProvider, $provide, $httpProvider, $locationProvider) 
 	})
 	.when("/grafico/media_pedido", {
 		controller: "lojaController",
-		templateUrl: "/grafico/media_pedido.html"
+		templateUrl: "grafico/media_pedido.html"
 	})
 	
 	.otherwise({
