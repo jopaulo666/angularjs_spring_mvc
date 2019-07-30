@@ -38,8 +38,8 @@ public class ClienteController extends DaoImplementacao<Cliente> implements
 	//intercepta
 	@RequestMapping(value="listar/{numeroPagina}", method=RequestMethod.GET, headers = "Accept=application/json")
 	@ResponseBody
-	public String listar(@PathVariable("numeroPagina") String numeroPagina) throws Exception{		
-		return new Gson().toJson(super.consultaPaginada(numeroPagina));
+	public byte[] listar(@PathVariable("numeroPagina") String numeroPagina) throws Exception{		
+		return new Gson().toJson(super.consultaPaginada(numeroPagina)).getBytes("UTF-8");
 	}
 	
 	@RequestMapping(value="totalPagina", method=RequestMethod.GET, headers = "Accept=application/json")
@@ -56,12 +56,12 @@ public class ClienteController extends DaoImplementacao<Cliente> implements
 	}
 	
 	@RequestMapping(value="buscarcliente/{codCliente}", method=RequestMethod.GET)
-	public @ResponseBody String buscarCliente(@PathVariable("codCliente") String codCliente) throws Exception{
+	public @ResponseBody byte[] buscarCliente(@PathVariable("codCliente") String codCliente) throws Exception{
 		Cliente objeto = super.loadObjeto(Long.parseLong(codCliente));
 		if (objeto == null) {
-			return "{}";
+			return "{}".getBytes("UTF-8");
 		}
-		return new Gson().toJson(objeto);
+		return new Gson().toJson(objeto).getBytes("UTF-8");
 	}
 	
 	@RequestMapping(value="buscarnome/{nomeCliente}", method=RequestMethod.GET)

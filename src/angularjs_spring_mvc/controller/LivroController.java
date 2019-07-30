@@ -72,6 +72,7 @@ public class LivroController extends DaoImplementacao<Livro> implements
 	
 	@RequestMapping(value="autenticar", method=RequestMethod.GET)
 	public @ResponseBody String autenticar() throws Exception{		
+		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
